@@ -10,6 +10,7 @@ import createServer from "./infra/server/server";
 export const start = async () => {
   try {
     await createDatabaseConnection();
+    console.log("Conectado com o banco!")
     createDependencyInjector();
     const app = createApp();
 
