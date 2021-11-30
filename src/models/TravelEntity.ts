@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
+import { Company } from "./CompanyEntity";
 
 @Entity()
 export class Travel {
@@ -17,4 +18,7 @@ export class Travel {
 
   @Column()
   avaliable_seats: number;
+
+  @ManyToOne(() => Company, company => company.travel)
+  company: Company;
 }
