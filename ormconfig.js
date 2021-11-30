@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 module.exports = {
   "type": "mysql",
   "host": process.env.TYPEORM_HOST,
