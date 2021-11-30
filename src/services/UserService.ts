@@ -3,9 +3,12 @@ import { UserDTO } from "../@types/dto/UserDto";
 import { IUserService } from "../@types/services/IUserService";
 import { IUserRepository } from "../@types/repositories/IUserRepository";
 
-@Service('UserService')
+@Service("UserService")
 export class UserService implements IUserService {
-  constructor(@Inject('UserRepository') private userRepository: IUserRepository) {}
+  constructor(
+    @Inject("UserRepository")
+    private userRepository: IUserRepository
+  ) {}
 
   async listar() {
     return this.userRepository.find();
@@ -20,13 +23,13 @@ export class UserService implements IUserService {
   }
 
   async atualizar(id: number, userDto: UserDTO) {
-    await this.userRepository.save({...userDto, id});
+    await this.userRepository.save({ ...userDto, id });
   }
 
   async remover(id: number) {
     const userToRemove = await this.userRepository.findOne(id);
     if (!userToRemove) {
-      throw new Error('User not found!');
+      throw new Error("User not found!");
     }
 
     await this.userRepository.remove(userToRemove);
