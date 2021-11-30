@@ -1,4 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
+import { Role } from "../@types/enums/Role";
+import { Company } from "./CompanyEntity";
 
 @Entity()
 export class User {
@@ -7,12 +9,17 @@ export class User {
   id: number;
 
   @Column()
-  firstName: string;
+  name: string;
 
   @Column()
-  lastName: string;
+  email: string;
 
   @Column()
-  age: number;
+  hashPassword: string;
 
+  @Column({ type: "enum", enum: Role, default: Role.PassengerUser })
+  role: Role;
+
+  @ManyToOne(() => Company, company => company.user)
+  company: Company;
 }
