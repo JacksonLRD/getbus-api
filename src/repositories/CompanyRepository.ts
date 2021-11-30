@@ -1,5 +1,5 @@
 import { ICompanyRepository } from "../@types/repositories/ICompanyRepository";
-import { Company } from "models/CompanyEntity";
+import { Company } from "../models/CompanyEntity";
 import { EntityRepository, Repository } from "typeorm";
 
 @EntityRepository(Company)
