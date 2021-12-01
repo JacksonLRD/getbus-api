@@ -20,6 +20,6 @@ export class User {
   @Column({ type: "enum", enum: Role, default: Role.PassengerUser })
   role: Role;
 
-  @ManyToOne(() => Company, company => company.user)
-  company: Company;
+  @ManyToOne(() => Company, company => company.users)
+  companies: Company;
 }

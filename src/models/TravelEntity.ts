@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany} from "typeorm";
 import { Company } from "./CompanyEntity";
 
 @Entity()
@@ -19,6 +19,7 @@ export class Travel {
   @Column()
   avaliable_seats: number;
 
-  @ManyToOne(() => Company, company => company.travel)
-  company: Company;
+  @ManyToMany(() => Company, company => company.travels)
+  @JoinTable()
+  companies: Company[];
 }
