@@ -2,6 +2,8 @@ import { ICompanyService } from "../@types/services/ICompanyService";
 import { Inject, Service } from "typedi";
 import { ICompanyRepository } from "../@types/repositories/ICompanyRepository";
 import { Company } from "../models/CompanyEntity";
+import { CompanyDTO } from "../@types/dto/CompanyDto";
+import { companyFactory } from "factories/companyFactory";
 
 @Service("CompanyService")
 export class CompanyService implements ICompanyService {
@@ -10,23 +12,33 @@ export class CompanyService implements ICompanyService {
     private companyRepository: ICompanyRepository
   ) {}
 
-  list(): Promise<Company[]> {
-    throw new Error("Method not implemented.");
+  async list(): Promise<Company[]> {
+    const results = await this.companyRepository.find();
+    return results;
   }
 
-  getById(): Promise<Company> {
-    throw new Error("Method not implemented.");
+  async getById(id: number): Promise<Company> {
+    const result = await this.companyRepository.findOne(id);
+    if(!result) {
+      throw new Error("Companhia não encontrada");
+    }
+    return result;
   }
 
-  create(): Promise<Company> {
-    throw new Error("Method not implemented.");
+  async create(companyDto: CompanyDTO): Promise<Company> {
+    const company = companyFactory(companyDto);
+    const result = await this.companyRepository.save(company);
+    return result;
   }
 
-  update(): Promise<void> {
-    throw new Error("Method not implemented.");
+  async update(id: number, companyDto: CompanyDTO): Promise<void> {
+    await this.companyRepository.update(id, companyDto)
+    // const company = await this.companyRepository.findOne(id);
+    // await this.companyRepository.save({ ...company, ...companyDto});
   }
 
-  remove(): Promise<void> {
-    throw new Error("Method not implemented.");
+  async remove(id: number): Promise<void> {
+    const company = await this.getById(id);
+    await this.companyRepository.remove(company);
   }
 }

@@ -19,7 +19,9 @@ export class Travel {
   @Column()
   avaliable_seats: number;
 
-  @ManyToMany(() => Company, company => company.travels)
+  @ManyToMany(() => Company, company => company.travels, {
+    cascade: ["insert", "update", "remove"]
+  })
   @JoinTable()
   companies: Company[];
 }
