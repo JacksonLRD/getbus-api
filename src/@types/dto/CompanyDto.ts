@@ -1,4 +1,4 @@
 export interface CompanyDTO {
-  id: number;
+  id?: number;
   name: string;
 }
