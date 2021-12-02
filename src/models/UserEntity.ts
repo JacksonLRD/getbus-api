@@ -1,10 +1,9 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Role } from "../@types/enums/Role";
 import { Company } from "./CompanyEntity";
 
 @Entity()
 export class User {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,6 +19,6 @@ export class User {
   @Column({ type: "enum", enum: Role, default: Role.PassengerUser })
   role: Role;
 
-  @ManyToOne(() => Company, company => company.users)
+  @ManyToOne(() => Company, (company) => company.users, { nullable: true })
   companies: Company;
 }

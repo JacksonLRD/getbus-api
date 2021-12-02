@@ -5,4 +5,4 @@ export const companyFactory = (newCompany: CompanyDTO): Company => {
   const company = new Company();
   company.name = newCompany.name;
   return company;
-}
+};
