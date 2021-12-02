@@ -5,6 +5,6 @@ export interface ICompanyService {
   list(): Promise<Company[]>;
   getById(id: number): Promise<Company>;
   create(companyDto: CompanyDTO): Promise<Company>;
-  update(id: number, companyDto: CompanyDTO): Promise<void>;
+  update(updatedCompanyDto): Promise<void>;
   remove(id: number): Promise<void>;
 }

@@ -3,5 +3,6 @@ import { EntityRepository, Repository } from "typeorm";
 import { IUserRepository } from "../@types/repositories/IUserRepository";
 
 @EntityRepository(User)
-export class UserRepository extends Repository<User> implements IUserRepository{
-}
+export class UserRepository
+  extends Repository<User>
+  implements IUserRepository {}
