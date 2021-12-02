@@ -6,6 +6,6 @@ export interface UserDTO {
   name: string;
   email: string;
   password: number;
-  role: Role;
+  role?: Role;
   company?: CompanyDTO;
 }

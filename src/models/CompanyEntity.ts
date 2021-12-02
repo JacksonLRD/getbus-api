@@ -1,10 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  ManyToMany,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Travel } from "./TravelEntity";
 import { User } from "./UserEntity";
 
@@ -22,6 +16,6 @@ export class Company {
   })
   users: User[];
 
-  @ManyToMany(() => Travel, (travel) => travel.companies, { nullable: true })
+  @OneToMany(() => Travel, (travel) => travel.company, { nullable: true })
   travels: Travel[];
 }

@@ -1,10 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  JoinTable,
-  ManyToMany,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Company } from "./CompanyEntity";
 
 @Entity()
@@ -19,15 +13,14 @@ export class Travel {
   destination: string;
 
   @Column({ nullable: true })
-  take_of: Date;
+  takeOf: Date;
 
   @Column()
-  avaliable_seats: number;
+  avaliableSeats: number;
 
-  @ManyToMany(() => Company, (company) => company.travels, {
+  @ManyToOne(() => Company, (company) => company.travels, {
     cascade: ["insert", "update", "remove"],
     nullable: true,
   })
-  @JoinTable()
-  companies: Company[];
+  company: Company;
 }
