@@ -1,5 +1,4 @@
 import { Role } from "../enums/Role";
-import { CompanyDTO } from "./CompanyDto";
 
 export interface UserDTO {
   id: number;
@@ -7,5 +6,5 @@ export interface UserDTO {
   email: string;
   password: number;
   role?: Role;
-  company?: CompanyDTO;
+  companyId?: number;
 }

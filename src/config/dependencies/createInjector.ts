@@ -7,6 +7,8 @@ import { TravelRepository } from "../../repositories/TravelRepository";
 // inicializador de dependências:
 // inicializa controllers
 import "../../controllers/UserController";
+import "../../controllers/CompanyController";
+import "../../controllers/TravelController";
 
 // inicializa services
 import "../../services/UserService";

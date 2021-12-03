@@ -23,13 +23,15 @@ export class CompanyService implements ICompanyService {
   }
 
   async create(companyDto: CompanyDTO): Promise<Company> {
-    // const company = companyFactory(companyDto);
-    const result = await this.companyRepository.save(companyDto);
+    const company = companyFactory(companyDto);
+    const result = await this.companyRepository.save(company);
     return result;
   }
 
-  async update(id: number, companyDto: CompanyDTO): Promise<void> {
-    await this.companyRepository.save({ ...companyDto, id });
+  async update(updatedCompanyDto: CompanyDTO): Promise<void> {
+    const company = await this.companyRepository.findOne(updatedCompanyDto.id);
+    const updatedCompany = { ...company, ...updatedCompanyDto };
+    await this.companyRepository.save(updatedCompany);
   }
 
   async remove(id: number): Promise<void> {

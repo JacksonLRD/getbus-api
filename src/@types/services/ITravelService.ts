@@ -2,9 +2,9 @@ import { TravelDTO } from "../../@types/dto/TravelDto";
 import { Travel } from "../../models/TravelEntity";
 
 export interface ITravelService {
-  list(): Promise<Travel[]>;
-  getById(id: number): Promise<Travel>;
-  create(newTravel: TravelDTO): Promise<Travel>;
-  update(id: number, updatedTravel: TravelDTO): Promise<void>;
+  getOneWithCompany(travelId: number): Promise<Travel[]>;
+  getAllWithCompany(): Promise<Travel[]>;
+  create(companyId: number, newTravel: TravelDTO): Promise<Travel>;
+  update(updatedTravelDto): Promise<void>;
   remove(id: number): Promise<void>;
 }

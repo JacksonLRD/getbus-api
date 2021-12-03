@@ -12,10 +12,9 @@ export class Company {
 
   @OneToMany(() => User, (user) => user.companies, {
     cascade: ["insert", "update"],
-    nullable: true,
   })
-  users: User[];
+  users?: User[];
 
   @OneToMany(() => Travel, (travel) => travel.company, { nullable: true })
-  travels: Travel[];
+  travels?: Travel[];
 }
