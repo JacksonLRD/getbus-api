@@ -20,5 +20,5 @@ export class User {
   role: Role;
 
   @ManyToOne(() => Company, (company) => company.users, { nullable: true })
-  companies: Company;
+  company: Company;
 }

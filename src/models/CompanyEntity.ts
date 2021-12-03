@@ -10,7 +10,7 @@ export class Company {
   @Column()
   name: string;
 
-  @OneToMany(() => User, (user) => user.companies, {
+  @OneToMany(() => User, (user) => user.company, {
     cascade: ["insert", "update"],
   })
   users?: User[];

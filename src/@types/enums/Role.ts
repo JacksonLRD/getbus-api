@@ -1,5 +1,5 @@
 export enum Role {
-  AdminUser = "Usuário Administrador",
-  CompanyUser = "Usuário Da Companhia",
-  PassengerUser = "Usuário Passageiro"
+  AdminUser = "UsuárioAdministrador",
+  CompanyUser = "UsuárioDaCompanhia",
+  PassengerUser = "UsuárioPassageiro",
 }
