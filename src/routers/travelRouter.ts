@@ -1,5 +1,5 @@
-import { TravelController } from "controllers/TravelController";
 import { RequestHandler, Router } from "express";
+import { TravelController } from "../controllers/TravelController";
 import Container from "typedi";
 const router = Router();
 

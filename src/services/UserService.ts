@@ -3,7 +3,7 @@ import { UserDTO } from "../@types/dto/UserDto";
 import { IUserService } from "../@types/services/IUserService";
 import { IUserRepository } from "../@types/repositories/IUserRepository";
 import { User } from "../models/UserEntity";
-import { userFactory } from "factories/userFactory";
+import { userFactory } from "../factories/userFactory";
 
 @Service("UserService")
 export class UserService implements IUserService {
