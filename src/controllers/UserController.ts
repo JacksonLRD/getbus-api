@@ -18,7 +18,7 @@ export class UserController {
   }
 
   async create(req: Request, res: Response): Promise<void> {
-    const user = await this.userService.create(req.body, Number(req.params.id));
+    const user = await this.userService.create(req.body);
     res.send(user).status(201);
   }
 

@@ -14,7 +14,7 @@ const createRouter = (): Router => {
   router.get("/:id", (async (req, res) => {
     await getController().getWithCompany(req, res);
   }) as RequestHandler);
-  router.post("/:id", (async (req, res) => {
+  router.post("", (async (req, res) => {
     await getController().create(req, res);
   }) as RequestHandler);
   router.patch("", (async (req, res) => {

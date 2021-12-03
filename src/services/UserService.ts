@@ -3,7 +3,7 @@ import { UserDTO } from "../@types/dto/UserDto";
 import { IUserService } from "../@types/services/IUserService";
 import { IUserRepository } from "../@types/repositories/IUserRepository";
 import { User } from "../models/UserEntity";
-import { userFactory } from "../factories/userFactory";
+import { updateUser, userFactory } from "../factories/userFactory";
 
 @Service("UserService")
 export class UserService implements IUserService {
@@ -22,15 +22,14 @@ export class UserService implements IUserService {
     return result;
   }
 
-  async create(newUserDto: UserDTO, companyId?: number): Promise<User> {
-    const user = userFactory(newUserDto, companyId);
+  async create(newUserDto: UserDTO): Promise<User> {
+    const user = userFactory(newUserDto);
     return await this.userRepository.save(user);
   }
 
-  async update(updatedUserDto: UserDTO) {
+  async update(updatedUserDto: UserDTO): Promise<User> {
     const user = await this.userRepository.findOne(updatedUserDto.id);
-    const updatedUser = { ...user, ...updatedUserDto };
-    await this.userRepository.save(updatedUser);
+    return await this.userRepository.save(updateUser(user, updatedUserDto));
   }
 
   async delete(id: number) {
