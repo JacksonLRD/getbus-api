@@ -17,3 +17,8 @@ export interface UpdateUser {
   role?: Role;
   companyId?: number;
 }
+
+export interface LoginData {
+  email: string;
+  password: string;
+}

@@ -4,6 +4,9 @@ import { IUserService } from "../@types/services/IUserService";
 import { IUserRepository } from "../@types/repositories/IUserRepository";
 import { User } from "../models/UserEntity";
 import { updateUser, userFactory } from "../factories/userFactory";
+import { getHashPassword } from "../utils/hashPassword";
+import { TokenPayload } from "../@types/middlewares/tokenPayLoad";
+import { sign } from "jsonwebtoken";
 
 @Service("UserService")
 export class UserService implements IUserService {
@@ -11,6 +14,21 @@ export class UserService implements IUserService {
     @Inject("UserRepository")
     private userRepository: IUserRepository
   ) {}
+
+  async authenticate(userEmail: string, userPassword: string): Promise<string> {
+    const user = await this.userRepository.findByEmail(userEmail);
+    if (user.hashPassword === getHashPassword(userPassword)) {
+      const { id, name, company, role } = user;
+      const payload: TokenPayload = {
+        role,
+        name,
+        id,
+        company,
+      };
+      return sign(payload, process.env.AUTH_SECRET);
+    }
+    throw new Error("Usuário ou senha incorretos");
+  }
 
   async listWithCompany(): Promise<User[]> {
     const results = await this.userRepository.findAllWithCompany();

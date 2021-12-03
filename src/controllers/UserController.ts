@@ -2,10 +2,23 @@
 import { Inject, Service } from "typedi";
 import { Request, Response } from "express";
 import { IUserService } from "../@types/services/IUserService";
+import { LoginData } from "../@types/dto/UserDto";
 
 @Service("UserController")
 export class UserController {
   constructor(@Inject("UserService") private userService: IUserService) {}
+
+  async authenticate(
+    req: Request,
+    res: Response
+  ): Promise<Response<{ token: string } | string>> {
+    const { email, password } = req.body as LoginData;
+    const token = await this.userService.authenticate(email, password);
+    if (token) {
+      return res.send({ token });
+    }
+    return res.status(422).send("Algo de errado não está certo");
+  }
 
   async listWithCompany(req: Request, res: Response): Promise<void> {
     const users = await this.userService.listWithCompany();

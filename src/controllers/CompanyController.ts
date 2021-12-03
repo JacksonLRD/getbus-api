@@ -2,6 +2,7 @@
 import { ICompanyService } from "../@types/services/ICompanyService";
 import { Request, Response } from "express";
 import { Inject, Service } from "typedi";
+import RequestWithUserData from "../infra/http/types/RequestWithUserData";
 
 @Service("CompanyController")
 export class CompanyController {
@@ -9,7 +10,7 @@ export class CompanyController {
     @Inject("CompanyService") private companyService: ICompanyService
   ) {}
 
-  async list(req: Request, res: Response): Promise<void> {
+  async list(req: RequestWithUserData, res: Response): Promise<void> {
     const companies = await this.companyService.list();
     res.send(companies).status(200);
   }

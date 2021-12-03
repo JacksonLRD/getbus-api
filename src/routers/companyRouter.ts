@@ -1,14 +1,19 @@
-import { CompanyController } from "controllers/CompanyController";
+import { CompanyController } from "../controllers/CompanyController";
 import { RequestHandler, Router } from "express";
 import Container from "typedi";
+import { userAdminAuthorization } from "../config/middlewares/userAuthorization";
+import RequestWithUserData from "../infra/http/types/RequestWithUserData";
 const router = Router();
 
 const getController = (): CompanyController => {
   return Container.get<CompanyController>("CompanyController");
 };
 
-const createRouter = (): Router => {
-  router.get("", (async (req, res) => {
+const createRouter = () => {
+  router.get("", userAdminAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
     await getController().list(req, res);
   }) as RequestHandler);
   router.get("/:id", (async (req, res) => {
