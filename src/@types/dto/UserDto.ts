@@ -4,7 +4,7 @@ export interface UserDTO {
   id: number;
   name: string;
   email: string;
-  password: number;
+  password?: string;
   role?: Role;
   companyId?: number;
 }
