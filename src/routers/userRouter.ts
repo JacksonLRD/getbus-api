@@ -1,6 +1,11 @@
 import { RequestHandler, Router } from "express";
 import { UserController } from "../controllers/UserController";
 import Container from "typedi";
+import {
+  userAdminAuthorization,
+  userCompanyAuthorization,
+} from "../config/middlewares/userAuthorization";
+import RequestWithUserData from "../infra/http/types/RequestWithUserData";
 const router = Router();
 
 const getController = (): UserController => {
@@ -14,8 +19,17 @@ const createRouter = (): Router => {
   router.get("/:id", (async (req, res) => {
     await getController().getWithCompany(req, res);
   }) as RequestHandler);
-  router.post("", (async (req, res) => {
-    await getController().create(req, res);
+  router.post("/admin", userAdminAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
+    await getController().createdByAdmin(req, res);
+  }) as RequestHandler);
+  router.post("/company-user", userCompanyAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
+    await getController().createdByCompanyUser(req, res);
   }) as RequestHandler);
   router.patch("", (async (req, res) => {
     await getController().update(req, res);

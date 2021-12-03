@@ -16,16 +16,28 @@ const createRouter = () => {
   ) => {
     await getController().list(req, res);
   }) as RequestHandler);
-  router.get("/:id", (async (req, res) => {
+  router.get("/:id", userAdminAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
     await getController().getById(req, res);
   }) as RequestHandler);
-  router.post("", (async (req, res) => {
+  router.post("", userAdminAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
     await getController().create(req, res);
   }) as RequestHandler);
-  router.patch("", (async (req, res) => {
+  router.patch("", userAdminAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
     await getController().update(req, res);
   }) as RequestHandler);
-  router.delete("/:id", (async (req, res) => {
+  router.delete("/:id", userAdminAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
     await getController().remove(req, res);
   }) as RequestHandler);
 

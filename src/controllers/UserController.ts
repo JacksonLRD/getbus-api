@@ -3,6 +3,7 @@ import { Inject, Service } from "typedi";
 import { Request, Response } from "express";
 import { IUserService } from "../@types/services/IUserService";
 import { LoginData } from "../@types/dto/UserDto";
+import RequestWithUserData from "../infra/http/types/RequestWithUserData";
 
 @Service("UserController")
 export class UserController {
@@ -15,7 +16,7 @@ export class UserController {
     const { email, password } = req.body as LoginData;
     const token = await this.userService.authenticate(email, password);
     if (token) {
-      return res.send({ token });
+      return res.send({ token }).status(200);
     }
     return res.status(422).send("Algo de errado não está certo");
   }
@@ -30,9 +31,30 @@ export class UserController {
     res.send(user).status(200);
   }
 
-  async create(req: Request, res: Response): Promise<void> {
-    const user = await this.userService.create(req.body);
+  async createdByAdmin(req: Request, res: Response): Promise<void> {
+    const user = await this.userService.createdByAdmin(req.body);
     res.send(user).status(201);
+  }
+
+  async createdByCompanyUser(
+    req: RequestWithUserData,
+    res: Response
+  ): Promise<void> {
+    try {
+      const { user } = req;
+      const newUser = await this.userService.createdByCompanyUser(
+        req.body,
+        user
+      );
+      res.status(201).send(newUser);
+      return;
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(422).send(error.message);
+        return;
+      }
+      res.status(500).send("Erro interno do servidor");
+    }
   }
 
   async update(req: Request, res: Response): Promise<void> {
