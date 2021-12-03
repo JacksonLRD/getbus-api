@@ -13,14 +13,14 @@ export class Travel {
   destination: string;
 
   @Column({ nullable: true })
-  takeOf: Date;
+  takeOf?: Date;
 
   @Column()
   avaliableSeats: number;
 
   @ManyToOne(() => Company, (company) => company.travels, {
-    cascade: ["insert", "update", "remove"],
+    cascade: true,
     nullable: true,
   })
-  company: Company;
+  company?: Company;
 }

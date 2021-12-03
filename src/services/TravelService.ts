@@ -12,23 +12,25 @@ export class TravelService implements ITravelService {
     private travelRepository: ITravelRepository
   ) {}
 
-  async list(): Promise<Travel[]> {
-    const results = await this.travelRepository.find();
+  async getAllWithCompany(): Promise<Travel[]> {
+    const results = await this.travelRepository.getAllWithCompany();
     return results;
   }
 
-  async getById(id: number): Promise<Travel> {
-    const result = await this.travelRepository.findOne(id);
+  async getOneWithCompany(travelId: number): Promise<Travel[]> {
+    const result = await this.travelRepository.getOneWithCompany(travelId);
     return result;
   }
 
-  async create(newTravel: TravelDTO): Promise<Travel> {
-    const travel = travelFactory(newTravel);
+  async create(companyId: number, newTravel: TravelDTO): Promise<Travel> {
+    const travel = travelFactory(companyId, newTravel);
     return await this.travelRepository.save(travel);
   }
 
-  async update(id: number, updatedTravel: TravelDTO): Promise<void> {
-    await this.travelRepository.save({ ...updatedTravel, id });
+  async update(updatedTravelDto: TravelDTO): Promise<void> {
+    const travel = await this.travelRepository.findOne(updatedTravelDto.id);
+    const updatedTravel = { ...travel, ...updatedTravelDto };
+    await this.travelRepository.save(updatedTravel);
   }
 
   async remove(id: number): Promise<void> {
