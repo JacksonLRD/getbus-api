@@ -41,6 +41,10 @@ export class TravelService implements ITravelService {
     }
   }
 
+  async sellOneTicket(travelDto: TravelDTO): Promise<void> {
+    await this.sellOneTicket(travelDto);
+  }
+
   async create(newTravel: TravelDTO, user: TokenPayload): Promise<Travel> {
     if (newTravel.companyId !== user.company.id) {
       throw new Error(

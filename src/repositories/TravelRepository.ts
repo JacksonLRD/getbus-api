@@ -25,4 +25,11 @@ export class TravelRepository
       },
     });
   }
+  async sellOneTicket(travelDto: TravelDTO): Promise<any> {
+    return this.createQueryBuilder()
+      .update(Travel)
+      .set({ availableSeats: () => "travelDto.availableSeats + 1" })
+      .where({ id: travelDto.id })
+      .execute();
+  }
 }

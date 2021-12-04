@@ -65,6 +65,12 @@ export class TravelController {
     }
   }
 
+  // Não tive tempo para implementar
+  // async sellOneTicket(req: Request, res: Response): Promise<void> {
+  //   await this.travelService.sellOneTicket(req.body);
+  //   res.send().status(200);
+  // }
+
   async update(req: Request, res: Response): Promise<void> {
     const updatedCompany = await this.travelService.update(req.body);
     res.send(updatedCompany).status(200);
