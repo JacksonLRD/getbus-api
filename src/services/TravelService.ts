@@ -2,8 +2,9 @@ import { ITravelService } from "../@types/services/ITravelService";
 import { Inject, Service } from "typedi";
 import { ITravelRepository } from "../@types/repositories/ITravelRepository";
 import { Travel } from "../models/TravelEntity";
-import { TravelDTO } from "../@types/dto/TravelDto";
+import { FilterTravelDTO, TravelDTO } from "../@types/dto/TravelDto";
 import { travelFactory } from "../factories/travelFactory";
+import { TokenPayload } from "../@types/middlewares/tokenPayLoad";
 
 @Service("TravelService")
 export class TravelService implements ITravelService {
@@ -12,8 +13,16 @@ export class TravelService implements ITravelService {
     private travelRepository: ITravelRepository
   ) {}
 
-  async getAllWithCompany(): Promise<Travel[]> {
-    const results = await this.travelRepository.getAllWithCompany();
+  async getAllWithCompany(
+    travelDto: TravelDTO,
+    user: TokenPayload
+  ): Promise<Travel[]> {
+    if (travelDto.companyId !== user.company.id) {
+      throw new Error(
+        "Usuário só pode filtrar viagens da própra companhia rodoviária!"
+      );
+    }
+    const results = await this.travelRepository.getAllWithCompany(travelDto);
     return results;
   }
 
@@ -22,8 +31,13 @@ export class TravelService implements ITravelService {
     return result;
   }
 
-  async create(companyId: number, newTravel: TravelDTO): Promise<Travel> {
-    const travel = travelFactory(companyId, newTravel);
+  async create(newTravel: TravelDTO, user: TokenPayload): Promise<Travel> {
+    if (newTravel.companyId !== user.company.id) {
+      throw new Error(
+        "Usuário só pode cadastrar uma viagem da própra companhia rodoviária!"
+      );
+    }
+    const travel = travelFactory(user.company.id, newTravel);
     return await this.travelRepository.save(travel);
   }
 

@@ -1,6 +1,7 @@
 import { ITravelRepository } from "../@types/repositories/ITravelRepository";
 import { Travel } from "../models/TravelEntity";
 import { EntityRepository, Repository } from "typeorm";
+import { TravelDTO } from "../@types/dto/TravelDto";
 
 @EntityRepository(Travel)
 export class TravelRepository
@@ -14,9 +15,14 @@ export class TravelRepository
     });
   }
 
-  getAllWithCompany(): Promise<Travel[]> {
+  getAllWithCompany(travelDto: TravelDTO): Promise<Travel[]> {
     return this.find({
       relations: ["company"],
+      where: {
+        origin: travelDto.origin,
+        destination: travelDto.destination,
+        takeOf: travelDto.takeOf,
+      },
     });
   }
 }

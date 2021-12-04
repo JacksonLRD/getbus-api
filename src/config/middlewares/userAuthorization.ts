@@ -22,7 +22,7 @@ export const userCompanyAuthorization = (
   const { user } = req;
 
   if (user.role !== "UsuarioDaCompanhia") {
-    res.status(403).send("Usuário não tem acesso");
+    res.status(403).send("Usuário não tem acesso a essa rota");
     return;
   }
   next();

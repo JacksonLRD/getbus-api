@@ -13,12 +13,18 @@ export class UserController {
     req: Request,
     res: Response
   ): Promise<Response<{ token: string } | string>> {
-    const { email, password } = req.body as LoginData;
-    const token = await this.userService.authenticate(email, password);
-    if (token) {
-      return res.send({ token }).status(200);
+    try {
+      const { email, password } = req.body as LoginData;
+      const token = await this.userService.authenticate(email, password);
+      if (token) {
+        return res.send({ token }).status(200);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(422).send(error.message);
+        return;
+      }
     }
-    return res.status(422).send("Algo de errado não está certo");
   }
 
   async listWithCompany(req: Request, res: Response): Promise<void> {

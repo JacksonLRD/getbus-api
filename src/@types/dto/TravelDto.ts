@@ -6,3 +6,11 @@ export interface TravelDTO {
   avaliableSeats: number;
   companyId?: number;
 }
+
+export interface FilterTravelDTO {
+  origin?: string;
+  destination?: string;
+  takeOfOne?: Date;
+  takeOfTwo?: Date;
+  companyId: number;
+}
