@@ -2,9 +2,11 @@
 
 ## Sistema da rodoviária de Fortaleza
 
-### Implementar o sistema de compra de passagens da rodoviária de Fortaleza. Os seguintes requisitos deverão ser observados:
+### Implementar o sistema de compra de passagens da rodoviária de Fortaleza:
 
-- Deverão existir os perfis de administrador do sistema, funcionário da companhia de viação e passageiros.
+#### [Diagrama Entidade Relacionamento](https://drive.google.com/file/d/1jAihtJ7SI0rTlBy86iFAFYQX7_vJ8cAw/view?usp=sharing) 
+
+- Existem os perfis de administrador do sistema, funcionário da companhia de viação e passageiros.
 - Todos os usuários precisam estar cadastrados e autenticados para utilizar o sistema.
 #### Usuários administradores:
 - podem cadastrar companhias
