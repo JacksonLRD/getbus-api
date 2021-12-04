@@ -3,11 +3,7 @@ import { UserCompanyDTO, UserDTO } from "../@types/dto/UserDto";
 import { IUserService } from "../@types/services/IUserService";
 import { IUserRepository } from "../@types/repositories/IUserRepository";
 import { User } from "../models/UserEntity";
-import {
-  updateUser,
-  userAdminFactory,
-  userCompanyFactory,
-} from "../factories/userFactory";
+import { updateUser, userFactory } from "../factories/userFactory";
 import { getHashPassword } from "../utils/hashPassword";
 import { TokenPayload } from "../@types/middlewares/tokenPayLoad";
 import { sign } from "jsonwebtoken";
@@ -45,8 +41,16 @@ export class UserService implements IUserService {
   }
 
   async createdByAdmin(newUserDto: UserDTO): Promise<User> {
-    const user = userAdminFactory(newUserDto);
+    const user = userFactory(newUserDto);
     return await this.userRepository.save(user);
+  }
+
+  async createdByPassengerUser(newUserDto: UserDTO): Promise<User> {
+    const newUser = userFactory(newUserDto);
+    if (newUser.role !== "UsuarioPassageiro") {
+      throw new Error("Usuário só pode se cadastrar Passageiro!");
+    }
+    return await this.userRepository.save(newUser);
   }
 
   async createdByCompanyUser(
@@ -62,7 +66,7 @@ export class UserService implements IUserService {
         "Usuário só pode cadastrar usuários de companhia rodoviária!"
       );
     }
-    const newUser = userCompanyFactory(newUserDto);
+    const newUser = userFactory(newUserDto);
     return await this.userRepository.save(newUser);
   }
 

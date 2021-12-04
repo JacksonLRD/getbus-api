@@ -7,6 +7,7 @@ export interface IUserService {
   listWithCompany(): Promise<User[]>;
   getWithCompany(userId: number): Promise<User[]>;
   createdByAdmin(usuarioDto: UserDTO): Promise<User>;
+  createdByPassengerUser(newUserDto: UserDTO): Promise<User>;
   createdByCompanyUser(
     newUserDto: UserCompanyDTO,
     user: TokenPayload

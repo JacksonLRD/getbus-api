@@ -51,7 +51,7 @@ describe("CompanyService", () => {
     it("Deve atualizar uma companhia", async () => {
       const id = faker.datatype.number();
       jest.spyOn(companyRepository, "save").mockResolvedValue(null);
-      await companyService.update(id, companyDto);
+      await companyService.update(companyDto);
 
       expect(companyRepository.save).toHaveBeenCalledWith({
         ...companyDto,

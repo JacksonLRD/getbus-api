@@ -27,3 +27,17 @@ export const userCompanyAuthorization = (
   }
   next();
 };
+
+export const userPassengerAuthorization = (
+  req: RequestWithUserData,
+  res: Response,
+  next: NextFunction
+): void => {
+  const { user } = req;
+
+  if (user.role !== "UsuarioPassageiro") {
+    res.status(403).send("Usuário não tem acesso a essa rota");
+    return;
+  }
+  next();
+};
