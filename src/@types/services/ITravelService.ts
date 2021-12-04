@@ -3,7 +3,7 @@ import { TravelDTO } from "../../@types/dto/TravelDto";
 import { Travel } from "../../models/TravelEntity";
 
 export interface ITravelService {
-  getOneWithCompany(travelId: number): Promise<Travel[]>;
+  getAvailableSeats(travelId: number, user: TokenPayload): Promise<number>;
   getAllWithCompany(
     travelDto: TravelDTO,
     user: TokenPayload

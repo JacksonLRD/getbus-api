@@ -2,7 +2,7 @@ import { ITravelService } from "../@types/services/ITravelService";
 import { Inject, Service } from "typedi";
 import { ITravelRepository } from "../@types/repositories/ITravelRepository";
 import { Travel } from "../models/TravelEntity";
-import { FilterTravelDTO, TravelDTO } from "../@types/dto/TravelDto";
+import { TravelDTO } from "../@types/dto/TravelDto";
 import { travelFactory } from "../factories/travelFactory";
 import { TokenPayload } from "../@types/middlewares/tokenPayLoad";
 
@@ -26,9 +26,19 @@ export class TravelService implements ITravelService {
     return results;
   }
 
-  async getOneWithCompany(travelId: number): Promise<Travel[]> {
+  async getAvailableSeats(
+    travelId: number,
+    user: TokenPayload
+  ): Promise<number> {
     const result = await this.travelRepository.getOneWithCompany(travelId);
-    return result;
+    if (result.company.id !== user.company.id) {
+      throw new Error(
+        "Usuário só pode buscar uma viagem da própra companhia rodoviária!"
+      );
+    } else {
+      const availableSeats = result.availableSeats as number;
+      return availableSeats;
+    }
   }
 
   async create(newTravel: TravelDTO, user: TokenPayload): Promise<Travel> {

@@ -3,7 +3,7 @@ export interface TravelDTO {
   origin: string;
   destination: string;
   takeOf?: Date;
-  avaliableSeats: number;
+  availableSeats: number;
   companyId?: number;
 }
 

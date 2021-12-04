@@ -20,7 +20,7 @@ const createRouter = (): Router => {
     req: RequestWithUserData,
     res
   ) => {
-    await getController().getOneWithCompany(req, res);
+    await getController().getAvailableSeats(req, res);
   }) as RequestHandler);
   router.post("", userCompanyAuthorization, (async (
     req: RequestWithUserData,

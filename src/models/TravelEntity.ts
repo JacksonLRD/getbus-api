@@ -16,7 +16,7 @@ export class Travel {
   takeOf?: Date;
 
   @Column()
-  avaliableSeats: number;
+  availableSeats: number;
 
   @ManyToOne(() => Company, (company) => company.travels, {
     cascade: true,

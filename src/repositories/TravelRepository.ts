@@ -8,8 +8,8 @@ export class TravelRepository
   extends Repository<Travel>
   implements ITravelRepository
 {
-  getOneWithCompany(travelId: number): Promise<Travel[]> {
-    return this.find({
+  getOneWithCompany(travelId: number): Promise<Travel> {
+    return this.findOne({
       relations: ["company"],
       where: { id: travelId },
     });
