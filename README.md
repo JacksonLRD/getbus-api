@@ -16,8 +16,10 @@
 - podem cadastrar viagens. Elas devem conter:<br />1. ponto de origem e destino.<br />2. data e hora de saída da viagem.<br />3. quantidade de assentos que a viagem habilita.<br />
 - podem consultar as viagens disponíveis para esta semana. Ele poderá filtrar o ponto de origem e destino, e selecionar um intervalo de datas.<br /> Exemplos de filtros:<br />Fortaleza - Tabuleiro do Norte, entre os dias 1 e 15 de dezembro de 2021
 
-- podem verificar a disponibilidade de assentos para uma viagem podem vender uma passagem (reservar um assento) de uma das viagens<br/>
-               caso não hajam assentos disponíveis, não deve-se permitir a compra do bilhete. Todo o acesso do usuário da companhia deve estar limitado somente aos dados da própria companhia. os funcionários da empresa A não devem acessar dados da empresa B.
+- podem verificar a disponibilidade de assentos para uma viagem<br />
+- podem vender uma passagem (reservar um assento) de uma das viagens<br/>
+               caso não hajam assentos disponíveis, não deve-se permitir a compra do bilhete<br />
+- Todo o acesso do usuário da companhia deve estar limitado somente aos dados da própria companhia. os funcionários da empresa A não devem acessar dados da empresa B.
 
 
 #### Usuários passageiros:
