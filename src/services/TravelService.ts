@@ -4,6 +4,7 @@ import { ITravelRepository } from "../@types/repositories/ITravelRepository";
 import { Travel } from "../models/TravelEntity";
 import { TravelDTO } from "../@types/dto/TravelDto";
 import { travelFactory } from "../factories/travelFactory";
+import { TokenPayload } from "../@types/middlewares/tokenPayLoad";
 
 @Service("TravelService")
 export class TravelService implements ITravelService {
@@ -12,18 +13,45 @@ export class TravelService implements ITravelService {
     private travelRepository: ITravelRepository
   ) {}
 
-  async getAllWithCompany(): Promise<Travel[]> {
-    const results = await this.travelRepository.getAllWithCompany();
+  async getAllWithCompany(
+    travelDto: TravelDTO,
+    user: TokenPayload
+  ): Promise<Travel[]> {
+    if (travelDto.companyId !== user.company.id) {
+      throw new Error(
+        "Usuário só pode filtrar viagens da própra companhia rodoviária!"
+      );
+    }
+    const results = await this.travelRepository.getAllWithCompany(travelDto);
     return results;
   }
 
-  async getOneWithCompany(travelId: number): Promise<Travel[]> {
+  async getAvailableSeats(
+    travelId: number,
+    user: TokenPayload
+  ): Promise<number> {
     const result = await this.travelRepository.getOneWithCompany(travelId);
-    return result;
+    if (result.company.id !== user.company.id) {
+      throw new Error(
+        "Usuário só pode buscar uma viagem da própra companhia rodoviária!"
+      );
+    } else {
+      const availableSeats = result.availableSeats as number;
+      return availableSeats;
+    }
   }
 
-  async create(companyId: number, newTravel: TravelDTO): Promise<Travel> {
-    const travel = travelFactory(companyId, newTravel);
+  async sellOneTicket(travelDto: TravelDTO): Promise<void> {
+    await this.sellOneTicket(travelDto);
+  }
+
+  async create(newTravel: TravelDTO, user: TokenPayload): Promise<Travel> {
+    if (newTravel.companyId !== user.company.id) {
+      throw new Error(
+        "Usuário só pode cadastrar uma viagem da própra companhia rodoviária!"
+      );
+    }
+    const travel = travelFactory(user.company.id, newTravel);
     return await this.travelRepository.save(travel);
   }
 

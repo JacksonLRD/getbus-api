@@ -3,6 +3,14 @@ export interface TravelDTO {
   origin: string;
   destination: string;
   takeOf?: Date;
-  avaliableSeats: number;
+  availableSeats: number;
   companyId?: number;
+}
+
+export interface FilterTravelDTO {
+  origin?: string;
+  destination?: string;
+  takeOfOne?: Date;
+  takeOfTwo?: Date;
+  companyId: number;
 }

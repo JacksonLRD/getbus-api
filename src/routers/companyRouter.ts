@@ -1,26 +1,43 @@
-import { CompanyController } from "controllers/CompanyController";
+import { CompanyController } from "../controllers/CompanyController";
 import { RequestHandler, Router } from "express";
 import Container from "typedi";
+import { userAdminAuthorization } from "../config/middlewares/userAuthorization";
+import RequestWithUserData from "../infra/http/types/RequestWithUserData";
 const router = Router();
 
 const getController = (): CompanyController => {
   return Container.get<CompanyController>("CompanyController");
 };
 
-const createRouter = (): Router => {
-  router.get("", (async (req, res) => {
+const createRouter = () => {
+  router.get("", userAdminAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
     await getController().list(req, res);
   }) as RequestHandler);
-  router.get("/:id", (async (req, res) => {
+  router.get("/:id", userAdminAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
     await getController().getById(req, res);
   }) as RequestHandler);
-  router.post("", (async (req, res) => {
+  router.post("", userAdminAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
     await getController().create(req, res);
   }) as RequestHandler);
-  router.patch("", (async (req, res) => {
+  router.patch("", userAdminAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
     await getController().update(req, res);
   }) as RequestHandler);
-  router.delete("/:id", (async (req, res) => {
+  router.delete("/:id", userAdminAuthorization, (async (
+    req: RequestWithUserData,
+    res
+  ) => {
     await getController().remove(req, res);
   }) as RequestHandler);
 
