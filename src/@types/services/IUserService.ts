@@ -1,10 +1,17 @@
-import { UserDTO } from "../dto/UserDto";
+import { UserDTO, UserCompanyDTO } from "../dto/UserDto";
 import { User } from "../../models/UserEntity";
+import { TokenPayload } from "../../@types/middlewares/tokenPayLoad";
 
 export interface IUserService {
-  listar(): Promise<User[]>;
-  buscar(id: number): Promise<User>;
-  criar(usuarioDto: UserDTO): Promise<User>;
-  atualizar(id: number, usuarioDto: UserDTO): Promise<void>;
-  remover(id: number): Promise<void>;
+  authenticate(userEmail: string, userPassword: string): Promise<string>;
+  listWithCompany(): Promise<User[]>;
+  getWithCompany(userId: number): Promise<User[]>;
+  createdByAdmin(usuarioDto: UserDTO): Promise<User>;
+  createdByPassengerUser(newUserDto: UserDTO): Promise<User>;
+  createdByCompanyUser(
+    newUserDto: UserCompanyDTO,
+    user: TokenPayload
+  ): Promise<User>;
+  update(updatedUserDto: UserDTO): Promise<User>;
+  delete(userId: number): Promise<void>;
 }

@@ -1,9 +1,8 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Company } from "./CompanyEntity";
 
 @Entity()
 export class Travel {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -13,12 +12,15 @@ export class Travel {
   @Column()
   destination: string;
 
-  @Column()
-  take_of: Date;
+  @Column({ nullable: true })
+  takeOf?: Date;
 
   @Column()
-  avaliable_seats: number;
+  availableSeats: number;
 
-  @ManyToOne(() => Company, company => company.travel)
-  company: Company;
+  @ManyToOne(() => Company, (company) => company.travels, {
+    cascade: true,
+    nullable: true,
+  })
+  company?: Company;
 }
