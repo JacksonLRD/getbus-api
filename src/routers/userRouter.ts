@@ -18,48 +18,56 @@ const createRouter = (): Router => {
   router.post("/sing-in", (async (req, res) => {
     await getController().authenticate(req, res);
   }) as RequestHandler);
-  router.get("", userAuthentication, userAdminAuthorization, (async (
+
+  router.get("/list", userAuthentication, userAdminAuthorization, (async (
     req,
     res
   ) => {
     await getController().listWithCompany(req, res);
   }) as RequestHandler);
-  router.get("/:id", userAuthentication, userAdminAuthorization, (async (
+
+  router.get("/find/:id", userAuthentication, userAdminAuthorization, (async (
     req,
     res
   ) => {
     await getController().getWithCompany(req, res);
   }) as RequestHandler);
-  router.post("/admin", userAdminAuthorization, (async (
-    req: RequestWithUserData,
+
+  router.post("/new-admin", userAuthentication, userAdminAuthorization, (async (
+    req,
     res
   ) => {
     await getController().createdByAdmin(req, res);
   }) as RequestHandler);
-  router.post("/passenger", userPassengerAuthorization, (async (
-    req: RequestWithUserData,
-    res
-  ) => {
+
+  router.post("/new-passenger", (async (req, res) => {
     await getController().createdByAdmin(req, res);
   }) as RequestHandler);
-  router.post("/company-user", userCompanyAuthorization, (async (
-    req: RequestWithUserData,
-    res
-  ) => {
-    await getController().createdByCompanyUser(req, res);
-  }) as RequestHandler);
-  router.patch("", userAuthentication, userAdminAuthorization, (async (
+
+  router.post(
+    "/new-company-user",
+    userAuthentication,
+    userCompanyAuthorization,
+    (async (req: RequestWithUserData, res) => {
+      await getController().createdByCompanyUser(req, res);
+    }) as RequestHandler
+  );
+
+  router.patch("/edit", userAuthentication, userAdminAuthorization, (async (
     req,
     res
   ) => {
     await getController().update(req, res);
   }) as RequestHandler);
-  router.delete("/:id", userAuthentication, userAdminAuthorization, (async (
-    req,
-    res
-  ) => {
-    await getController().delete(req, res);
-  }) as RequestHandler);
+
+  router.delete(
+    "/delete/:id",
+    userAuthentication,
+    userAdminAuthorization,
+    (async (req, res) => {
+      await getController().delete(req, res);
+    }) as RequestHandler
+  );
 
   return router;
 };

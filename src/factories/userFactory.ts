@@ -5,7 +5,7 @@ import { getHashPassword } from "../utils/hashPassword";
 
 export const userFactory = (newUser: UserDTO): User => {
   const company = new Company();
-  company.id = newUser.companyId;
+  company.id = newUser.companyId ? newUser.companyId : null;
   const user = new User();
   user.name = newUser.name;
   user.email = newUser.email;

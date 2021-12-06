@@ -1,5 +1,5 @@
 import { Inject, Service } from "typedi";
-import { UserCompanyDTO, UserDTO } from "../@types/dto/UserDto";
+import { UpdateUser, UserCompanyDTO, UserDTO } from "../@types/dto/UserDto";
 import { IUserService } from "../@types/services/IUserService";
 import { IUserRepository } from "../@types/repositories/IUserRepository";
 import { User } from "../models/UserEntity";
@@ -47,8 +47,11 @@ export class UserService implements IUserService {
 
   async createdByPassengerUser(newUserDto: UserDTO): Promise<User> {
     const newUser = userFactory(newUserDto);
+    if (!newUser) {
+      throw new Error("Informações incorretas e/ou incompletas");
+    }
     if (newUser.role !== "UsuarioPassageiro") {
-      throw new Error("Usuário só pode se cadastrar Passageiro!");
+      throw new Error("Usuário só pode se cadastrar como Passageiro");
     }
     return await this.userRepository.save(newUser);
   }
@@ -70,7 +73,7 @@ export class UserService implements IUserService {
     return await this.userRepository.save(newUser);
   }
 
-  async update(updatedUserDto: UserDTO): Promise<User> {
+  async update(updatedUserDto: UpdateUser): Promise<User> {
     const user = await this.userRepository.findOne(updatedUserDto.id);
     return await this.userRepository.save(updateUser(user, updatedUserDto));
   }

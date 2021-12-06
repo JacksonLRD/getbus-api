@@ -39,8 +39,8 @@ export class UserController {
 
   async createdByAdmin(req: Request, res: Response): Promise<void> {
     try {
-      const user = await this.userService.createdByAdmin(req.body);
-      res.send(user).status(201);
+      const newUser = await this.userService.createdByAdmin(req.body);
+      res.send(newUser).status(201);
       return;
     } catch (error) {
       if (error instanceof Error) {
@@ -48,10 +48,14 @@ export class UserController {
         return;
       }
       res.status(500).send("Erro interno do servidor");
+      return;
     }
   }
 
-  async createdByPassengerUser(req: Request, res: Response): Promise<void> {
+  async createdByPassengerUser(
+    req: RequestWithUserData,
+    res: Response
+  ): Promise<void> {
     try {
       const newUser = await this.userService.createdByPassengerUser(req.body);
       res.send(newUser).status(201);
@@ -62,6 +66,7 @@ export class UserController {
         return;
       }
       res.status(500).send("Erro interno do servidor");
+      return;
     }
   }
 
