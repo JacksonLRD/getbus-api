@@ -8,6 +8,7 @@ export interface ITravelService {
     travelDto: TravelDTO,
     user: TokenPayload
   ): Promise<Travel[]>;
+  sellOneTicket(traveId: number): Promise<any>;
   create(newTravel: TravelDTO, user: TokenPayload): Promise<Travel>;
   update(updatedTravelDto): Promise<void>;
   remove(id: number): Promise<void>;

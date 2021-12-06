@@ -1,4 +1,4 @@
-import { UserDTO, UserCompanyDTO } from "../dto/UserDto";
+import { UserDTO, UserCompanyDTO, UpdateUser } from "../dto/UserDto";
 import { User } from "../../models/UserEntity";
 import { TokenPayload } from "../../@types/middlewares/tokenPayLoad";
 
@@ -12,6 +12,6 @@ export interface IUserService {
     newUserDto: UserCompanyDTO,
     user: TokenPayload
   ): Promise<User>;
-  update(updatedUserDto: UserDTO): Promise<User>;
+  update(updatedUserDto: UpdateUser): Promise<User>;
   delete(userId: number): Promise<void>;
 }
