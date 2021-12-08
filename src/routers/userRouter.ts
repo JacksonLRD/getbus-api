@@ -26,7 +26,7 @@ const createRouter = (): Router => {
     await getController().listWithCompany(req, res);
   }) as RequestHandler);
 
-  router.get("/find/:id", userAuthentication, userAdminAuthorization, (async (
+  router.get("/:id/find", userAuthentication, userAdminAuthorization, (async (
     req,
     res
   ) => {
@@ -40,8 +40,8 @@ const createRouter = (): Router => {
     await getController().createdByAdmin(req, res);
   }) as RequestHandler);
 
-  router.post("/new-passenger", (async (req, res) => {
-    await getController().createdByAdmin(req, res);
+  router.post("/new-passenger", (async (req: RequestWithUserData, res) => {
+    await getController().createdByPassengerUser(req, res);
   }) as RequestHandler);
 
   router.post(
@@ -53,7 +53,7 @@ const createRouter = (): Router => {
     }) as RequestHandler
   );
 
-  router.patch("/edit", userAuthentication, userAdminAuthorization, (async (
+  router.patch("/:id/edit", userAuthentication, userAdminAuthorization, (async (
     req,
     res
   ) => {
@@ -61,7 +61,7 @@ const createRouter = (): Router => {
   }) as RequestHandler);
 
   router.delete(
-    "/delete/:id",
+    "/:id/delete",
     userAuthentication,
     userAdminAuthorization,
     (async (req, res) => {

@@ -1,11 +1,17 @@
 import { Inject, Service } from "typedi";
-import { UpdateUser, UserCompanyDTO, UserDTO } from "../@types/dto/UserDto";
+import {
+  UpdateUser,
+  UserCompanyDTO,
+  UserDTO,
+  UpdatedUser,
+} from "../@types/dto/UserDto";
 import { IUserService } from "../@types/services/IUserService";
 import { IUserRepository } from "../@types/repositories/IUserRepository";
 import { User } from "../models/UserEntity";
 import { updateUser, userFactory } from "../factories/userFactory";
 import { getHashPassword } from "../utils/hashPassword";
 import { TokenPayload } from "../@types/middlewares/tokenPayLoad";
+import { validateEmail } from "../utils/validateEmail";
 import { sign } from "jsonwebtoken";
 
 @Service("UserService")
@@ -36,20 +42,23 @@ export class UserService implements IUserService {
   }
 
   async getWithCompany(userId: number): Promise<User[]> {
+    if (!userId) {
+      throw new Error("Informações incorretas e/ou incompletas");
+    }
     const result = await this.userRepository.findOneWithCompany(userId);
+    if (!result) {
+      throw new Error("Usuário não encontrado");
+    }
     return result;
   }
 
-  async createdByAdmin(newUserDto: UserDTO): Promise<User> {
+  async createdByAdmin(newUserDto: UserDTO): Promise<UpdatedUser> {
     const user = userFactory(newUserDto);
     return await this.userRepository.save(user);
   }
 
-  async createdByPassengerUser(newUserDto: UserDTO): Promise<User> {
+  async createdByPassengerUser(newUserDto: UserDTO): Promise<UpdatedUser> {
     const newUser = userFactory(newUserDto);
-    if (!newUser) {
-      throw new Error("Informações incorretas e/ou incompletas");
-    }
     if (newUser.role !== "UsuarioPassageiro") {
       throw new Error("Usuário só pode se cadastrar como Passageiro");
     }
@@ -59,7 +68,7 @@ export class UserService implements IUserService {
   async createdByCompanyUser(
     newUserDto: UserCompanyDTO,
     user: TokenPayload
-  ): Promise<User> {
+  ): Promise<UpdatedUser> {
     if (newUserDto.companyId !== user.company.id) {
       throw new Error(
         "Usuário só pode cadastrar usuário da mesma companhia rodoviária!"
@@ -73,17 +82,22 @@ export class UserService implements IUserService {
     return await this.userRepository.save(newUser);
   }
 
-  async update(updatedUserDto: UpdateUser): Promise<User> {
-    const user = await this.userRepository.findOne(updatedUserDto.id);
-    return await this.userRepository.save(updateUser(user, updatedUserDto));
+  async update(
+    userId: number,
+    updatedUserDto: UpdateUser
+  ): Promise<UpdatedUser> {
+    const userToUpdate = await this.userRepository.findOne(userId);
+    return await this.userRepository.save(
+      updateUser(userToUpdate, updatedUserDto)
+    );
   }
 
-  async delete(id: number) {
-    const userToRemove = await this.userRepository.findOne(id);
+  async delete(userId: number) {
+    const userToRemove = await this.userRepository.findOne(userId);
     if (!userToRemove) {
-      throw new Error("User not found!");
+      throw new Error("Usuário não encontrado!");
     }
-
     await this.userRepository.remove(userToRemove);
   }
+
 }

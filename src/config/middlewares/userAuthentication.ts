@@ -10,7 +10,7 @@ export const userAuthentication = (
 ) => {
   const authorization = req.headers.authorization;
   if (!authorization) {
-    res.status(401).send("Unauthorized");
+    res.status(401).send("Usuário não autorizado");
     return;
   }
 
@@ -21,7 +21,7 @@ export const userAuthentication = (
     ) as TokenPayload;
     req.user = payload;
   } catch (error) {
-    res.status(403).send("Forbidden");
+    res.status(403).send("Usuário não permitido");
     return;
   }
 

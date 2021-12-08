@@ -30,3 +30,5 @@ export interface LoginData {
   email: string;
   password: string;
 }
+
+export type UpdatedUser = Omit<UserDTO, "password">;

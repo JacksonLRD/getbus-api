@@ -58,6 +58,7 @@ export class UserController {
   ): Promise<void> {
     try {
       const newUser = await this.userService.createdByPassengerUser(req.body);
+      console.log(req.body);
       res.send(newUser).status(201);
       return;
     } catch (error) {
@@ -92,12 +93,14 @@ export class UserController {
   }
 
   async update(req: Request, res: Response): Promise<void> {
-    const updatedUser = await this.userService.update(req.body);
+    const userId = Number(req.params.id);
+    const updatedUser = await this.userService.update(userId, req.body);
     res.send(updatedUser).status(200);
   }
 
   async delete(req: Request, res: Response): Promise<void> {
-    await this.userService.delete(Number(req.params.id));
+    const userId = Number(req.params.id);
+    await this.userService.delete(userId);
     res.send().status(200);
   }
 }

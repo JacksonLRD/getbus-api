@@ -16,7 +16,7 @@ export class User {
   @Column()
   hashPassword: string;
 
-  @Column({ type: "enum", enum: Role, default: Role.PassengerUser })
+  @Column({ type: "enum", enum: Role })
   role: Role;
 
   @ManyToOne(() => Company, (company) => company.users, { nullable: true })
