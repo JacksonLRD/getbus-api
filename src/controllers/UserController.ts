@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Inject, Service } from "typedi";
 import { Request, Response } from "express";
-import { IUserService } from "../@types/services/IUserService";
-import { LoginData } from "../@types/dto/UserDto";
+import { IUserService } from "../types/services/IUserService";
+import { LoginData } from "../types/dto/UserDto";
 import RequestWithUserData from "../infra/http/types/RequestWithUserData";
 
 @Service("UserController")

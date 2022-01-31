@@ -1,10 +1,10 @@
-import { ITravelService } from "../@types/services/ITravelService";
+import { ITravelService } from "../types/services/ITravelService";
 import { Inject, Service } from "typedi";
-import { ITravelRepository } from "../@types/repositories/ITravelRepository";
+import { ITravelRepository } from "../types/repositories/ITravelRepository";
 import { Travel } from "../models/TravelEntity";
-import { TravelDTO } from "../@types/dto/TravelDto";
+import { TravelDTO } from "../types/dto/TravelDto";
 import { travelFactory } from "../factories/travelFactory";
-import { TokenPayload } from "../@types/middlewares/tokenPayLoad";
+import { TokenPayload } from "../types/middlewares/TokenPayLoad";
 
 @Service("TravelService")
 export class TravelService implements ITravelService {

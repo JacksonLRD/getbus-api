@@ -1,5 +1,5 @@
 import { Travel } from "../models/TravelEntity";
-import { TravelDTO } from "../@types/dto/TravelDto";
+import { TravelDTO } from "../types/dto/TravelDto";
 import { Company } from "../models/CompanyEntity";
 import { Request } from "express";
 

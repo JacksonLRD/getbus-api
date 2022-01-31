@@ -1,4 +1,4 @@
-import { TravelDTO } from "../../@types/dto/TravelDto";
+import { TravelDTO } from "../dto/TravelDto";
 import { Travel } from "../../models/TravelEntity";
 
 export interface ITravelRepository {

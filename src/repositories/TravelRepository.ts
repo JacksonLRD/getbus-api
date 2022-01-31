@@ -1,7 +1,7 @@
-import { ITravelRepository } from "../@types/repositories/ITravelRepository";
+import { ITravelRepository } from "../types/repositories/ITravelRepository";
 import { Travel } from "../models/TravelEntity";
 import { EntityRepository, Repository } from "typeorm";
-import { TravelDTO } from "../@types/dto/TravelDto";
+import { TravelDTO } from "../types/dto/TravelDto";
 
 @EntityRepository(Travel)
 export class TravelRepository

@@ -5,7 +5,7 @@ import {
   UpdatedUser,
 } from "../dto/UserDto";
 import { User } from "../../models/UserEntity";
-import { TokenPayload } from "../../@types/middlewares/tokenPayLoad";
+import { TokenPayload } from "../../types/middlewares/TokenPayLoad";
 
 export interface IUserService {
   authenticate(userEmail: string, userPassword: string): Promise<string>;

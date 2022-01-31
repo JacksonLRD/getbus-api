@@ -1,8 +1,8 @@
-import { ICompanyService } from "../@types/services/ICompanyService";
+import { ICompanyService } from "../types/services/ICompanyService";
 import { Inject, Service } from "typedi";
-import { ICompanyRepository } from "../@types/repositories/ICompanyRepository";
+import { ICompanyRepository } from "../types/repositories/ICompanyRepository";
 import { Company } from "../models/CompanyEntity";
-import { CompanyDTO } from "../@types/dto/CompanyDto";
+import { CompanyDTO } from "../types/dto/CompanyDto";
 import { companyFactory } from "../factories/companyFactory";
 
 @Service("CompanyService")

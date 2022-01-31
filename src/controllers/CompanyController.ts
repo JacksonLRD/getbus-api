@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { ICompanyService } from "../@types/services/ICompanyService";
+import { ICompanyService } from "../types/services/ICompanyService";
 import { Request, Response } from "express";
 import { Inject, Service } from "typedi";
 import RequestWithUserData from "../infra/http/types/RequestWithUserData";

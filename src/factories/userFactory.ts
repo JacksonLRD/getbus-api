@@ -1,6 +1,6 @@
 import { Company } from "../models/CompanyEntity";
 import { User } from "../models/UserEntity";
-import { UpdateUser, UserDTO } from "../@types/dto/UserDto";
+import { UpdateUser, UserDTO } from "../types/dto/UserDto";
 import { getHashPassword } from "../utils/hashPassword";
 import { validateEmail } from "../utils/validateEmail";
 
