@@ -4,13 +4,13 @@ import {
   UserCompanyDTO,
   UserDTO,
   UpdatedUser,
-} from "../@types/dto/UserDto";
-import { IUserService } from "../@types/services/IUserService";
-import { IUserRepository } from "../@types/repositories/IUserRepository";
+} from "../types/dto/UserDto";
+import { IUserService } from "../types/services/IUserService";
+import { IUserRepository } from "../types/repositories/IUserRepository";
 import { User } from "../models/UserEntity";
 import { updateUser, userFactory } from "../factories/userFactory";
 import { getHashPassword } from "../utils/hashPassword";
-import { TokenPayload } from "../@types/middlewares/tokenPayLoad";
+import { TokenPayload } from "../../src/types/middlewares/TokenPayLoad";
 import { validateEmail } from "../utils/validateEmail";
 import { sign } from "jsonwebtoken";
 
@@ -99,5 +99,4 @@ export class UserService implements IUserService {
     }
     await this.userRepository.remove(userToRemove);
   }
-
 }

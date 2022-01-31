@@ -1,4 +1,4 @@
-import { CompanyDTO } from "../../@types/dto/CompanyDto";
+import { CompanyDTO } from "../dto/CompanyDto";
 import { Company } from "../../models/CompanyEntity";
 
 export interface ICompanyService {
