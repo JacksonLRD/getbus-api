@@ -28,6 +28,12 @@ const createRouter = (): Router => {
   ) => {
     await getController().create(req, res);
   }) as RequestHandler);
+  router.get("/sellATicket/:id", userCompanyAuthorization, (async (
+    req,
+    res
+  ) => {
+    await getController().sellOneTicket(req, res);
+  }) as RequestHandler);
   router.patch("", userCompanyAuthorization, (async (
     req: RequestWithUserData,
     res

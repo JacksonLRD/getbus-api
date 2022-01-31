@@ -19,7 +19,6 @@ export class Travel {
   availableSeats: number;
 
   @ManyToOne(() => Company, (company) => company.travels, {
-    cascade: true,
     nullable: true,
   })
   company?: Company;

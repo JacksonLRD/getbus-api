@@ -13,7 +13,7 @@ export const travelFactory = (
   travel.origin = newTravel.origin;
   travel.destination = newTravel.destination;
   travel.takeOf = new Date(newTravel.takeOf);
-  travel.availableSeats = newTravel.availableSeats as number;
+  travel.availableSeats = newTravel.availableSeats;
   travel.company = company;
 
   return travel;

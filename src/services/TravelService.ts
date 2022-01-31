@@ -36,13 +36,15 @@ export class TravelService implements ITravelService {
         "Usuário só pode buscar uma viagem da própra companhia rodoviária!"
       );
     } else {
-      const availableSeats = result.availableSeats as number;
+      const availableSeats = result.availableSeats;
       return availableSeats;
     }
   }
 
-  async sellOneTicket(travelDto: TravelDTO): Promise<void> {
-    await this.sellOneTicket(travelDto);
+  async sellOneTicket(travelId: number): Promise<void> {
+    const travelToSell = await this.travelRepository.findOne(travelId);
+    travelToSell.availableSeats -= 1;
+    await this.update(travelToSell);
   }
 
   async create(newTravel: TravelDTO, user: TokenPayload): Promise<Travel> {

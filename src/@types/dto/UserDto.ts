@@ -1,7 +1,7 @@
 import { Role } from "../enums/Role";
 
 export interface UserDTO {
-  id: number;
+  id?: number;
   name: string;
   email: string;
   password?: string;
@@ -15,7 +15,7 @@ export interface UserCompanyDTO {
   email: string;
   password?: string;
   role: Role.CompanyUser;
-  companyId?: number;
+  companyId: number;
 }
 export interface UpdateUser {
   id: number;
@@ -30,3 +30,5 @@ export interface LoginData {
   email: string;
   password: string;
 }
+
+export type UpdatedUser = Omit<UserDTO, "password">;

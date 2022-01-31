@@ -65,11 +65,20 @@ export class TravelController {
     }
   }
 
-  // Não tive tempo para implementar
-  // async sellOneTicket(req: Request, res: Response): Promise<void> {
-  //   await this.travelService.sellOneTicket(req.body);
-  //   res.send().status(200);
-  // }
+  async sellOneTicket(req: Request, res: Response): Promise<void> {
+    try {
+      const travelId = parseInt(req.params.id);
+      await this.travelService.sellOneTicket(travelId);
+      res.send("Bilhete vendido com sucesso!").status(200);
+      return;
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(422).send(error.message);
+        return;
+      }
+      res.status(500).send("Erro interno do servidor");
+    }
+  }
 
   async update(req: Request, res: Response): Promise<void> {
     const updatedCompany = await this.travelService.update(req.body);
