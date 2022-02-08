@@ -1,4 +1,4 @@
-import { ICompanyRepository } from "../@types/repositories/ICompanyRepository";
+import { ICompanyRepository } from "../types/repositories/ICompanyRepository";
 import { Company } from "../models/CompanyEntity";
 import { EntityRepository, Repository } from "typeorm";
 

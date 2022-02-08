@@ -1,4 +1,4 @@
-import { TokenPayload } from "../../@types/middlewares/tokenPayLoad";
+import { TokenPayload } from "../../types/middlewares/TokenPayLoad";
 import { NextFunction, Response } from "express";
 import RequestWithUserData from "../../infra/http/types/RequestWithUserData";
 import { verify } from "jsonwebtoken";

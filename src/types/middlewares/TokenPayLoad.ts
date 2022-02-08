@@ -1,5 +1,5 @@
 import { Company } from "models/CompanyEntity";
-import { Role } from "../../@types/enums/Role";
+import { Role } from "../enums/Role";
 
 export interface TokenPayload {
   id: number;

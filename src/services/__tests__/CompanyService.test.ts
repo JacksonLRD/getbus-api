@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { CompanyDTO } from "../../@types/dto/CompanyDto";
+import { CompanyDTO } from "../../types/dto/CompanyDto";
 import * as faker from "faker";
 import { CompanyRepository } from "../../repositories/CompanyRepository";
 import { CompanyService } from "../CompanyService";
