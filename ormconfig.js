@@ -10,8 +10,8 @@ module.exports = {
   logging: false,
   entities: [
     process.env.NODE_ENV === "development"
-      ? "src/models/**/*Entity.ts"
-      : "dist/models/**/*Entity.js",
+      ? "src/modules/**/*Entity.ts"
+      : "dist/modules/**/*Entity.js",
   ],
   migrations: ["src/migration/*.ts"],
   subscribers: ["src/subscriber/**/*.ts"],
