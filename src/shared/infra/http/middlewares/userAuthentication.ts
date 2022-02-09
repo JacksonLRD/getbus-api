@@ -1,6 +1,6 @@
 import { NextFunction, Response } from 'express';
 import { verify } from 'jsonwebtoken';
-import TokenPayload from '../../../../modules/users/middlewares/TokenPayLoad';
+import TokenPayload from '../../../../modules/users/interfaces/middlewares/TokenPayLoad';
 import RequestWithUserData from '../types/RequestWithUserData';
 
 const userAuthentication = (req: RequestWithUserData, res: Response, next: NextFunction) => {
