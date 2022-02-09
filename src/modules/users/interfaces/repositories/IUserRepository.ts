@@ -1,4 +1,4 @@
-import { UserDTO } from '../../dtos/UserDto';
+import { UserDTO } from '../dtos/UserDTO';
 import User from '../../infra/typeorm/entities/UserEntity';
 
 export default interface IUserRepository {

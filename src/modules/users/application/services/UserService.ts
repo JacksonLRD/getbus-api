@@ -1,12 +1,12 @@
 import { Inject, Service } from 'typedi';
 import { sign } from 'jsonwebtoken';
-import { UpdateUser, UserCompanyDTO, UserDTO, UpdatedUser } from '../../dtos/UserDto';
+import { UpdateUser, UserCompanyDTO, UserDTO, UpdatedUser } from '../../interfaces/dtos/UserDTO';
 import IUserService from '../../interfaces/services/IUserService';
 import IUserRepository from '../../interfaces/repositories/IUserRepository';
 import User from '../../infra/typeorm/entities/UserEntity';
 import { updateUser, userFactory } from '../../factory/userFactory';
 import getHashPassword from '../../../../shared/utils/hashPassword';
-import TokenPayload from '../../middlewares/TokenPayLoad';
+import TokenPayload from '../../interfaces/middlewares/TokenPayLoad';
 
 @Service('UserService')
 export default class UserService implements IUserService {

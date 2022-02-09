@@ -1,5 +1,5 @@
-import CompanyDTO from '../../companies/dtos/CompanyDto';
-import Role from '../enums/Role';
+import CompanyDTO from '../../../companies/dtos/CompanyDto';
+import Role from '../../enums/Role';
 
 export default interface TokenPayload {
   id: number;

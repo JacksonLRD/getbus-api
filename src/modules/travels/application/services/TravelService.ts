@@ -4,7 +4,7 @@ import ITravelRepository from '../../interfaces/repositories/ITravelRepository';
 import Travel from '../../infra/typeorm/entities/TravelEntity';
 import { TravelDTO } from '../../dtos/TravelDto';
 import { travelFactory } from '../../factory/travelFactory';
-import TokenPayload from '../../../users/middlewares/TokenPayLoad';
+import TokenPayload from '../../../users/interfaces/middlewares/TokenPayLoad';
 
 @Service('TravelService')
 export default class TravelService implements ITravelService {
