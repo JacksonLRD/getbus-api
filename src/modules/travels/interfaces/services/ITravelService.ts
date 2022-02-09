@@ -1,4 +1,4 @@
-import TokenPayload from '../../../users/middlewares/TokenPayLoad';
+import TokenPayload from '../../../users/interfaces/middlewares/TokenPayLoad';
 import { TravelDTO } from '../../dtos/TravelDto';
 import Travel from '../../infra/typeorm/entities/TravelEntity';
 

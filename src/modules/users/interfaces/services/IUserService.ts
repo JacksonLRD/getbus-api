@@ -1,6 +1,6 @@
-import { UserDTO, UserCompanyDTO, UpdateUser, UpdatedUser } from '../../dtos/UserDto';
+import { UserDTO, UserCompanyDTO, UpdateUser, UpdatedUser } from '../dtos/UserDTO';
 import User from '../../infra/typeorm/entities/UserEntity';
-import TokenPayload from '../../middlewares/TokenPayLoad';
+import TokenPayload from '../middlewares/TokenPayLoad';
 
 export default interface IUserService {
   authenticate(userEmail: string, userPassword: string): Promise<string>;

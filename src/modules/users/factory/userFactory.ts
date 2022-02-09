@@ -1,6 +1,6 @@
 import Company from '../../companies/infra/typeorm/entities/CompanyEntity';
 import User from '../infra/typeorm/entities/UserEntity';
-import { UpdateUser, UserDTO } from '../dtos/UserDto';
+import { UpdateUser, UserDTO } from '../interfaces/dtos/UserDTO';
 import getHashPassword from '../../../shared/utils/hashPassword';
 import validateEmail from '../../../shared/utils/validateEmail';
 

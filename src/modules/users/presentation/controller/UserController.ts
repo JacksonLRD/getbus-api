@@ -2,7 +2,7 @@
 import { Inject, Service } from 'typedi';
 import { Request, Response } from 'express';
 import IUserService from '../../interfaces/services/IUserService';
-import { LoginData } from '../../dtos/UserDto';
+import { LoginData } from '../../interfaces/dtos/UserDTO';
 import RequestWithUserData from '../../../../shared/infra/http/types/RequestWithUserData';
 
 @Service('UserController')
