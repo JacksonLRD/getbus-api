@@ -51,7 +51,6 @@ export default class UserController {
   async createdByPassengerUser(req: RequestWithUserData, res: Response): Promise<void> {
     try {
       const newUser = await this.userService.createdByPassengerUser(req.body);
-      console.log(req.body);
       res.send(newUser).status(201);
       return;
     } catch (error) {
