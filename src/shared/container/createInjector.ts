@@ -1,19 +1,19 @@
 import { getCustomRepository } from 'typeorm';
 import Container from 'typedi';
-import UserRepository from '../../modules/users/infra/typeorm/repositories/UserRepository';
-import CompanyRepository from '../../modules/companies/infra/typeorm/repositories/CompanyRepository';
-import TravelRepository from '../../modules/travels/infra/typeorm/repositories/TravelRepository';
+import UserRepository from '../../modules-depreciated/users/infra/typeorm/repositories/UserRepository';
+import CompanyRepository from '../../modules-depreciated/companies/infra/typeorm/repositories/CompanyRepository';
+import TravelRepository from '../../modules-depreciated/travels/infra/typeorm/repositories/TravelRepository';
 
 // inicializador de dependências:
 // inicializa controllers
-import '../../modules/users/presentation/controller/UserController';
-import '../../modules/companies/presentation/controller/CompanyController';
-import '../../modules/travels/presentation/controller/TravelController';
+import '../../modules-depreciated/users/presentation/controller/UserController';
+import '../../modules-depreciated/companies/presentation/controller/CompanyController';
+import '../../modules-depreciated/travels/presentation/controller/TravelController';
 
 // inicializa services
-import '../../modules/users/application/services/UserService';
-import '../../modules/companies/application/services/CompanyService';
-import '../../modules/travels/application/services/TravelService';
+import '../../modules-depreciated/users/application/services/UserService';
+import '../../modules-depreciated/companies/application/services/CompanyService';
+import '../../modules-depreciated/travels/application/services/TravelService';
 
 const createDependencyInjector = () => {
   Container.set('UserRepository', getCustomRepository(UserRepository));

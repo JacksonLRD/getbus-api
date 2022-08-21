@@ -1,6 +1,6 @@
 import { RequestHandler, Router } from 'express';
 import Container from 'typedi';
-import CompanyController from '../../../../modules/companies/presentation/controller/CompanyController';
+import CompanyController from '../../../../modules-depreciated/companies/presentation/controller/CompanyController';
 import { userAdminAuthorization } from '../middlewares/userAuthorization';
 import RequestWithUserData from '../types/RequestWithUserData';
 
