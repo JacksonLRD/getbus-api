@@ -4,7 +4,7 @@ import * as express from 'express';
 
 import * as cors from 'cors';
 import * as morgan from 'morgan';
-import createDatabaseConnection from '../typeorm/connect';
+// import createDatabaseConnection from '../typeorm/connect';
 import createDependencyInjector from '../../container/createInjector';
 // import createRouters from './routers';
 import routes from './routers';
@@ -35,7 +35,7 @@ const createServer = (app: express.Express) => {
 
 const start = async () => {
   try {
-    await createDatabaseConnection();
+    // await createDatabaseConnection();
     createDependencyInjector();
     const app = createApp();
 
