@@ -1,25 +1,25 @@
-import 'reflect-metadata';
-import './infra/dependencies/container.injector';
+// import 'reflect-metadata';
+// import './infra/dependencies/container.injector';
 
-import * as dotenv from 'dotenv';
-import express from 'express';
+// // import * as dotenv from 'dotenv';
+// // import express from 'express';
 
-import createDatabaseConnection from './infra/database/connect';
-import createMiddlewares from './infra/middlewares';
-import createServer from './server/server';
+// import createDatabaseConnection from './infra/database/connect';
+// // import createMiddlewares from './infra/middlewares';
+// import { server } from './server/server';
 
-dotenv.config();
+// // dotenv.config();
 
-const start = async (): Promise<void> => {
-  try {
-    await createDatabaseConnection();
+// const start = async (): Promise<void> => {
+//   try {
+//     await createDatabaseConnection();
 
-    const app = express();
-    createMiddlewares(app);
-    createServer(app);
-  } catch (error) {
-    console.error('Fatal error: ', error);
-  }
-};
+//     // const app = express();
+//     // createMiddlewares(app);
+//     server();
+//   } catch (error) {
+//     console.error('Fatal error: ', error);
+//   }
+// };
 
-start();
+// start();

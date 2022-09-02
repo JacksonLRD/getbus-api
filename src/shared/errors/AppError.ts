@@ -1,18 +1,10 @@
-class AppError {
-  public message: string;
+export default class AppError {
+  public readonly message: string;
 
-  public status: number;
+  public readonly status: number;
 
   constructor(message: string, status = 500) {
     this.message = message;
     this.status = status;
   }
-
-  // public static formatMessage(message: any) {
-  //   return message?.map((i) => {
-  //     return { message: i.message, path: i.path };
-  //   });
-  // }
 }
-
-export default AppError;

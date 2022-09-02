@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl":".",
+    "baseUrl": ".",
     "target": "es2017",
     "module": "commonjs",
     "lib": ["es6"],
@@ -11,22 +11,10 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "types": ["node", "@types/jest"],
-    "typeRoots" : ["./node_modules/@types"],
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": false
-  },
-  "paths": {
-    "@modules/*": ["./app/modules/*"],
-    "@config/*": ["./config/*"],
-    "@shared/*": ["./app/shared/*"]
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude" : [
-    "src/**/*.spec.ts"
-  ]
+    "noImplicitAny": true
+  }
 }
