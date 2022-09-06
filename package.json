@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "dist/shared/index.js",
+    "start": "node dist/shared/server/server.js",
     "dev": "ts-node-dev --inspect --transpile-only  -r tsconfig-paths/register --ignore-watch node_modules src/shared/server/server.ts"
   },
   "keywords": [],

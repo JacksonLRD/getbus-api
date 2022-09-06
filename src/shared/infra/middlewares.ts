@@ -13,8 +13,7 @@ const createMiddlewares = async (app: express.Express): Promise<void> => {
   if (!NODE_ENV) throw new Error(NODE_ENV_NOT_DEFINED);
 
   const swaggerFile = './src/shared/infra/swagger/swagger.json';
-  const swaggerData = await fs.readFile(swaggerFile, 'utf8');
-  const swaggerDocument = JSON.parse(swaggerData);
+  const swaggerDocument = JSON.parse(await fs.readFile(swaggerFile, 'utf8'));
 
   app.use(cors());
   app.use(express.json({ type: 'application/json' }), express.urlencoded({ extended: true }));
