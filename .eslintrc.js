@@ -1,35 +1,26 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
+  "env": {
+    "node": true,
+    "es6": true
   },
-  extends: [
-    'airbnb-base',
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+  ],
+  "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier",
   ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 13,
-    sourceType: 'module',
-  },
-  plugins: [
-    '@typescript-eslint',
-    'import'
-  ],
-  rules: {
+  "rules": {
     "prettier/prettier": "error",
-    "@typescript-eslint/indent": ["error", 2],
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error",
-    "import/no-absolute-path": "error",
-    "import/no-unresolved":"off",
-    "import/extensions":"off",
-    "class-methods-use-this":"off",
-    "@typescript-eslint/indent": "off",
-    "no-useless-constructor":"off",
-    "no-useless-catch": "off"
-  },
+    "no-console": "off",
+  }
 };

@@ -6,11 +6,13 @@
      "emitDecoratorMetadata": true,
      "experimentalDecorators": true,
      "allowSyntheticDefaultImports": true,
-     "target": "es2017",
+     "target": "es2019",
      "sourceMap": true,
      "outDir": "./dist",
-     "baseUrl": "./",
+     "baseUrl": "./src",
      "incremental": true,
      "resolveJsonModule": true
-   }
+   },
+   "exclude": ["node_modules", "tests", "dist", "**/*spec.ts", "./exemples/**/*"]
  }
+ 
