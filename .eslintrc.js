@@ -1,36 +1,26 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
+  "env": {
+    "node": true,
+    "es6": true
   },
-  extends: [
-    'airbnb-base',
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
   ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 13,
-    sourceType: 'module',
-  },
-  plugins: ['@typescript-eslint', 'import'],
-  rules: {
-    'prettier/prettier': 'error',
-    '@typescript-eslint/indent': ['error', 2],
-    '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/no-non-null-assertion': 'warn',
-    '@typescript-eslint/no-cond-assign': 'off',
-    'import/no-absolute-path': 'error',
-    'import/no-unresolved': 'off',
-    'import/extensions': 'off',
-    'class-methods-use-this': 'off',
-    'no-useless-constructor': 'off',
-    'no-useless-catch': 'off',
-    'no-restricted-syntax': 'off',
-    'no-await-in-loop': 'off',
-    'no-shadow': 'off',
-  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier",
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-console": "off",
+  }
 };
