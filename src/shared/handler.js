@@ -5,7 +5,7 @@ import { routes } from "../modules/users/userRouter.js";
 import { DEFAULT_HEADER } from "./utils/defaultHeader.js";
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
-const filePath = join(currentDir, "./database", "data.json");
+export const filePath = join(currentDir, "./database", "data.json");
 
 const userRoutes = routes({ filePath });
 

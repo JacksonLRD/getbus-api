@@ -1,16 +1,15 @@
-import { test, mock } from "node:test";
+import { describe, it, mock, beforeEach } from "node:test";
 import assert from "node:assert";
 
-test("User Unit Test Suit", async (t) => {
-  const userServiceMock = {
-    find: async () => stubResult,
-  };
+import { userContainer } from "../../../src/modules/users/userContainer.js";
+import { filePath } from "../../../src/shared/handler.js";
 
-  const endpoints = routes({
-    userService: userServiceMock,
-  });
+describe("User Unit Test Suit", async () => {
+  beforeEach(() => mock.restoreAll());
 
-  await t.test("GET: Should call /users:get", async () => {
+  const userController = userContainer({ filePath });
+
+  it("GET: Should call /users:get", async () => {
     const stubResult = [
       {
         id: "13f84173-4c25-458b-a85e-14fa4a471e25",
@@ -19,7 +18,15 @@ test("User Unit Test Suit", async (t) => {
         password: "jackson",
       },
     ];
+
+    mock
+      .method(userController, userController.find.name)
+      .mock.mockImplementation(async () => stubResult);
+
+    const result = await userController.find();
+
+    assert.deepStrictEqual(userController.find.mock.callCount(), 1);
   });
 
-  await t.test("POST: Should call /users:post", async () => {});
+  it("POST: Should call /users:post", async () => {});
 });

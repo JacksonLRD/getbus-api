@@ -1,40 +1,38 @@
-import test from 'node:test';
-import assert from 'node:assert';
-import { promisify } from 'node:util';
+import { describe, it, before, after } from "node:test";
+import assert from "node:assert";
+import { env } from "node:process";
 
-test('User Integration Test Suit', async (t) => {
+describe("User Integration Test Suit", async () => {
+  let _server = {};
+  const PORT = env.PORT ?? 3344;
+  const testServerAddress = `http://localhost:${PORT}/users`;
 
-  const testPort = 4433;
-  process.env.PORT = testPort;
+  before(async () => {
+    _server = (await import("../../../src/shared/index.js")).server;
 
-  const { server } = await import('../../../src/shared/index.js');
-  const testServerAddress = `http://localhost:${testPort}/users`;
+    await new Promise((resolve) => _server.once("listening", resolve));
+  });
 
-  await t.test('It should create a user', async (t) => {
+  after((done) => _server.close(done));
+
+  it("Should create a user", async () => {
     const data = {
-      name: 'Jackson Purdeus',
-      email: 'jackson@jackson.com.br',
-      password: 'jackson'
-    }
+      name: "Jackson Purdeus",
+      email: "jackson@jackson.com.br",
+      password: "jackson",
+    };
 
     const request = await fetch(testServerAddress, {
-      method: 'POST',
-      body: JSON.stringify(data)
+      method: "POST",
+      body: JSON.stringify(data),
     });
     const result = await request.json();
 
     assert.deepStrictEqual(
-      request.headers.get('content-type'),
-      'application/json'
+      request.headers.get("content-type"),
+      "application/json"
     );
-    assert.deepStrictEqual(
-      result.success,
-      'User created with success!'
-    );
-    assert.ok(
-      result.id.length > 20
-    );
+    assert.deepStrictEqual(result.success, "User created with success!");
+    assert.ok(result.id.length > 20);
   });
-
-  await promisify(server.close.bind(server))()
 });
