@@ -1,32 +1,10 @@
-import { once } from "node:events";
+import { userContainer } from "./userContainer.js";
 
-import { DEFAULT_HEADER } from "../../shared/utils/defaultHeader.js";
-import User from "./entities/User.js";
+export const routes = ({ filePath }) => {
+  const userController = userContainer({ filePath });
 
-export const routes = ({
-  userService
-}) => ({
-  '/users:get': async (request, response) => {
-    const users = await userService.find();
-
-    response.writeHead(200, DEFAULT_HEADER);
-    response.write(JSON.stringify({
-      results: users
-    }));
-    return response.end();
-  },
-
-  '/users:post': async (request, response) => {
-    const data = await once(request, 'data');
-    const user = new User(JSON.parse(data));
-
-    const id = await userService.create(user);
-
-    response.writeHead(201, DEFAULT_HEADER);
-    response.write(JSON.stringify({
-      id,
-      success: 'User created with success!'
-    }));
-    return response.end();
-  },
-});
+  return {
+    "/users:get": async (req, res) => userController.find(req, res),
+    "/users:post": async (req, res) => userController.create(req, res),
+  };
+};

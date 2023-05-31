@@ -10,17 +10,14 @@ export default class UserRepository {
   }
 
   async find() {
-    return this.#currentFileContent()
+    return this.#currentFileContent();
   }
 
   async create(data) {
     const currentFile = await this.#currentFileContent(this.filePath);
     currentFile.push(data);
 
-    await writeFile(
-      this.filePath,
-      JSON.stringify(currentFile)
-    );
+    await writeFile(this.filePath, JSON.stringify(currentFile));
 
     return data.id;
   }
