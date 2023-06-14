@@ -1,12 +1,13 @@
 import { readFile, writeFile } from "fs/promises";
+import { fileURLToPath } from "node:url";
+import { join, dirname } from "node:path";
 
 export default class UserRepository {
-  constructor({ filePath }) {
-    this.filePath = filePath;
-  }
-
   async #currentFileContent() {
-    return JSON.parse(await readFile(this.filePath));
+    const currentDir = dirname(fileURLToPath(import.meta.url));
+    const filePath = join(currentDir, "../../../shared/database", "data.json");
+
+    return JSON.parse(await readFile(filePath));
   }
 
   async find() {

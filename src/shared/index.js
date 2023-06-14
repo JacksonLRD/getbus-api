@@ -1,10 +1,16 @@
-import http from 'node:http';
-import handler from './handler.js';
+import iracenv from "./utils/iracenv.js";
+import customRouter from "./router/index.js";
+import { routes } from "../modules/users/userRouter.js";
 
-const PORT = process.env.PORT ?? 3344;
+await iracenv.config();
 
-const server = http.createServer(handler).listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+const PORT = process.env.PORT || 3344;
 
-export {
-  server
-}
+const app = customRouter();
+
+routes(app);
+const server = app.listen(PORT, () =>
+  console.log(`Server is running on port ${PORT}`)
+);
+
+export { server };

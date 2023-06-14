@@ -1,10 +1,8 @@
 import { userContainer } from "./userContainer.js";
 
-export const routes = ({ filePath }) => {
-  const userController = userContainer({ filePath });
+export const routes = (app) => {
+  const userController = userContainer();
 
-  return {
-    "/users:get": async (req, res) => userController.find(req, res),
-    "/users:post": async (req, res) => userController.create(req, res),
-  };
+  app.get("/users", (req, res) => userController.find(req, res));
+  app.post("/users", (req, res) => userController.create(req, res));
 };

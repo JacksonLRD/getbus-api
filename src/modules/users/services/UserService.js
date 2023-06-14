@@ -1,13 +1,17 @@
+import UserRepository from "../repositories/UserRepository.js";
+
 export default class UserService {
-  constructor({ userRepository }) {
-    this.userRepository = userRepository;
+  #userRepository;
+
+  constructor(repository = {}) {
+    this.#userRepository = repository;
   }
 
   find() {
-    return this.userRepository.find();
+    return this.#userRepository.find();
   }
 
   create(data) {
-    return this.userRepository.create(data);
+    return this.#userRepository.create(data);
   }
 }
