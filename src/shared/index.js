@@ -8,8 +8,6 @@ debug.active = config.log.debug;
 const PORT = config.app.port;
 
 routes(app);
-const server = app.listen(PORT, () =>
+app.listen(PORT, () =>
   console.log(`Server is running on port ${PORT}`)
 );
-
-export { server };

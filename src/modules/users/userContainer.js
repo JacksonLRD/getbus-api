@@ -1,4 +1,3 @@
-import UserController from "./UserController.js";
 import UserRepository from "./repositories/UserRepository.js";
 import UserService from "./services/UserService.js";
 
