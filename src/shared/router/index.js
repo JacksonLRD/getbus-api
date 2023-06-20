@@ -1,29 +1,28 @@
 import http from "node:http";
 import { DEFAULT_HEADER } from "../utils/defaultHeader.js";
 
-export default function customRouter() {
+
+/**
+ * Creates a customRouter application
+ */
+export default function CustomRouter() {
+
+  const httpVerbs = ["get", "post", "put", "patch"];
   const routes = {
-    default: (request, response) => {
+    'default': (request, response) => {
       response.writeHead(404, DEFAULT_HEADER);
       response.write("Not Found");
       response.end();
     },
   };
 
-  function listen(port, cb) {
-    http.createServer(_handler).listen(port, cb());
-  }
-
-  function get(path, controller) {
-    const route = path.concat(":", "get");
-
-    routes[route] = controller;
-  }
-
-  function post(path, controller) {
-    const route = path.concat(":", "post");
-
-    routes[route] = controller;
+  /**
+   * Starts a server listening for connections
+   * @param {number | undefined} port Port to run an application
+   * @param callback Called when the server is running
+   */
+  function listen(port = 3000, callback = () => void 0) {
+    http.createServer(_handler).listen(port, callback());
   }
 
   function _handler(req, res) {
@@ -50,9 +49,23 @@ export default function customRouter() {
     };
   }
 
+  void function _addMethods() {
+    for (let method of httpVerbs) {
+      CustomRouter.prototype[method] = function (path, handler) {
+        const route = path.concat(":", method);
+
+        routes[route] = handler;
+      };
+    }
+  }()
+
+  const { get, post, put, patch } = CustomRouter.prototype
+
   return {
-    listen,
     get,
     post,
-  };
+    put,
+    patch,
+    listen
+  }
 }
