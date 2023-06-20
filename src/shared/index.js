@@ -1,12 +1,11 @@
-import iracenv from "./utils/iracenv.js";
-import customRouter from "./router/index.js";
+import CustomRouter from "./router/index.js";
 import { routes } from "../modules/users/userRouter.js";
+import config from "../config/env/default.js";
+import debug from "./utils/debug.js";
 
-await iracenv.config();
-
-const PORT = process.env.PORT || 3344;
-
-const app = customRouter();
+const app = CustomRouter();
+debug.active = config.log.debug;
+const PORT = config.app.port;
 
 routes(app);
 const server = app.listen(PORT, () =>

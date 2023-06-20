@@ -7,7 +7,7 @@ export const userContainer = () => {
 
   const userService = new UserService(userRepository);
 
-  const userController = new UserController(userService);
-
-  return userController;
+  return {
+    userService,
+  };
 };
