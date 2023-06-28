@@ -1,6 +1,6 @@
-import iracenv from "../../shared/utils/iracenv.js";
 import { env } from "node:process"
-import debug from "../../shared/utils/debug.js";
+
+import iracenv from "../../shared/utils/iracenv.js";
 
 await iracenv.config()
 

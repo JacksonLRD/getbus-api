@@ -1,8 +1,7 @@
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { readFile } from "node:fs/promises";
-import { env, cwd } from "node:process";
-import { homedir } from "node:os";
+import { env } from "node:process";
 
 /**
  * Get all variables from .env file in root
