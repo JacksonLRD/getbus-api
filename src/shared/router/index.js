@@ -1,13 +1,9 @@
 import http from "node:http";
+
 import { DEFAULT_HEADER } from "../utils/defaultHeader.js";
+import debug from "../utils/debug.js";
 
-
-/**
- * Creates a customRouter application
- */
-export default function CustomRouter() {
-
-  const httpVerbs = ["get", "post", "put", "patch"];
+  const httpVerbs = ["GET", "POST", "PUT", "DELETE", "PATCH"];
   const routes = {
     'default': (request, response) => {
       response.writeHead(404, DEFAULT_HEADER);
@@ -15,6 +11,11 @@ export default function CustomRouter() {
       response.end();
     },
   };
+
+/**
+ * Creates a customRouter application
+ */
+export default function CustomRouter() {
 
   /**
    * Starts a server listening for connections
@@ -26,11 +27,16 @@ export default function CustomRouter() {
   }
 
   function _handler(req, res) {
-    const { url, method } = req;
+    const { url, method, headers } = req;
+
+    const parsedURL = new URL(url, `http://${headers.host}`)
+
+
     const pathName = url.split("?")[0];
-    const key = `${pathName}:${method.toLowerCase()}`;
+    const key = `${pathName}:${method}`;
 
     const route = routes[key] || routes.default;
+    debug().log(`->src/shared/router/index.js\n ->Route called:\n  ${key}`)
 
     return Promise.resolve(route(req, res)).catch(_ErrorHandler(res));
   }
@@ -59,13 +65,13 @@ export default function CustomRouter() {
     }
   }()
 
-  const { get, post, put, patch } = CustomRouter.prototype
-
+  const { GET, POST, PUT, PATCH, DELETE } = CustomRouter.prototype
   return {
-    get,
-    post,
-    put,
-    patch,
-    listen
+    get: GET,
+    post: POST,
+    put: PUT,
+    patch: PATCH,
+    delete: DELETE,
+    listen,
   }
 }
