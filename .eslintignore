@@ -1,7 +1,0 @@
-node_modules
-dist
-CHANGELOG.md
-babel.config.js
-tsconfig.json
-editorconfig
-server
