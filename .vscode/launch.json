@@ -5,15 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Debug on DEV",
       "type": "node",
       "request": "launch",
-      "name": "Debug on DEV",
-      // "skipFiles": ["<node_internals>/**"],
-      // "runtimeArgs": ["run", "start"],
-      "program": "${workspaceFolder}/src/shared/index.js",
-      // "console": "integratedTerminal",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "openOnFirstSessionStart",
+      // "program": "${workspaceFolder}/src/shared/index.js",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "DEBUG": "active"
       }
     }
   ]
