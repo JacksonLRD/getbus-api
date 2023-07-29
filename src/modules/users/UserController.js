@@ -13,7 +13,21 @@ export default class UserController {
     res.writeHead(200, DEFAULT_HEADER);
     res.write(
       JSON.stringify({
-        results: users,
+        users,
+      })
+    );
+    return res.end();
+  }
+
+  static async findById(req, res) {
+    const userService = userContainer().userService;
+
+    const user = await userService.findById(req.params.id);
+
+    res.writeHead(200, DEFAULT_HEADER);
+    res.write(
+      JSON.stringify({
+        user,
       })
     );
     return res.end();

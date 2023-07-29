@@ -11,6 +11,10 @@ export default class UserService {
     return this.#userRepository.find();
   }
 
+  findById(id) {
+    return this.#userRepository.find(id);
+  }
+
   create(data) {
     return this.#userRepository.create(data);
   }
