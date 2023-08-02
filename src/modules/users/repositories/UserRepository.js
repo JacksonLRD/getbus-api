@@ -14,6 +14,12 @@ export default class UserRepository {
     return this.#currentFileContent();
   }
 
+  async findById(id) {
+    const users = await this.#currentFileContent();
+
+    return users.find((u) => u.id === id);
+  }
+
   async create(data) {
     const currentFile = await this.#currentFileContent(this.filePath);
     currentFile.push(data);

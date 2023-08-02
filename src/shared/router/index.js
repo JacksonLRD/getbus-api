@@ -5,7 +5,7 @@ import debug from "../utils/debug.js";
 
 const httpVerbs = ["GET", "POST", "PUT", "DELETE", "PATCH"];
 const routes = {
-  default: (request, response) => {
+  default: async (request, response) => {
     response.writeHead(404, DEFAULT_HEADER);
     response.write("Not Found");
     response.end();
@@ -29,9 +29,24 @@ export default function CustomRouter() {
     const { url, method, headers } = req;
 
     const { pathname } = new URL(url, `http://${headers.host}`);
+    let pathSplitted = pathname.split("/");
 
-    const pathSanitized = pathname.split("/", 2).join("/");
-    const key = `${pathSanitized}:${method}`;
+    const flag = pathSplitted[2];
+    let key;
+
+    if (flag) {
+      console.log("existe");
+      pathSplitted.pop();
+
+      const pathSanitized = pathSplitted.join("/");
+      const regex = new RegExp(`(${method}${pathSanitized}/:[a-zA-Z]*)`);
+
+      key = Object.keys(routes).join("+").match(regex)[0];
+    } else {
+      const pathSanitized = pathSplitted.join("/");
+
+      key = `${method}${pathSanitized}`;
+    }
 
     const route = routes[key] || routes.default;
     debug().log(`->src/shared/router/index.js\n ->Route called:\n  ${key}`);
@@ -56,9 +71,11 @@ export default function CustomRouter() {
   void (function _addMethods() {
     for (let method of httpVerbs) {
       CustomRouter.prototype[method] = function (path, handler) {
-        const route = path.concat(":", method);
+        const route = method.concat(path);
+        // const route = path.concat(":", method);
 
         routes[route] = handler;
+        console.log("routes:\n", routes);
       };
     }
   })();
