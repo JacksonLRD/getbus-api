@@ -35,7 +35,6 @@ export default function CustomRouter() {
     let key;
 
     if (flag) {
-      console.log("existe");
       pathSplitted.pop();
 
       const pathSanitized = pathSplitted.join("/");
@@ -75,7 +74,6 @@ export default function CustomRouter() {
         // const route = path.concat(":", method);
 
         routes[route] = handler;
-        console.log("routes:\n", routes);
       };
     }
   })();
