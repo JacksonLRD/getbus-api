@@ -33,3 +33,61 @@
 ##### Obvervações:
 
 ##### comprar bilhete significa reservar um assento, ou seja, debitar a quantidade de assentos disponíveis na viagem. Não prevemos um nenhum modelo de pagamento ou numeração de cadeiras.
+
+# Usuarios
+
+## Atributos
+
+## Admin
+
+- Podem cadastrar/editar/apagar companhias
+- Podem cadastrar/editar/apagar outros administradores e funcionarios de todas as companhias
+- Podem cadastrar/editar/apagar usuários passageiros
+- Nao podem cadastrar/editar/apagar viagens
+
+## User Companhias
+
+- So podem cadastrar/editar/apagar usuarios da sua companhia
+- Podem cadastrar/editar/apagar usuários passageiros
+- Podem cadastrar/editar/apagar viagens
+- Podem consultar viagens disponiveis
+  - Filtros
+    - Ponto de origem e destino
+    - intervalo de datas
+- Podem verificar a disponibilidade de assentos para uma viagem
+- Podem vender(reservar e confirmar) um assento, caso exista algum disponivel
+- Limitado apenas a sua companhia(nao pode ver viagens, usuários e dados de outras companhias)
+
+## User Passageiro
+
+- Podem se cadastrar no sistema
+- Podem comprar uma passagem estando ou nao cadastrado
+- Podem consultar todas as viagens com assentos disponíveis(de acordo com o filtro usado)
+
+# Viagens
+
+## Atributos
+
+- Ponto de origem e destino
+- Data e hora de saída da viagem
+- Quantidade de assentos que a viagem habilita
+
+#USER
+-id: uuid
+-name: string
+-typeUser: ADMIN, COMPANY-USER, PASSENGER
+-BusCompanyId: uuid
+
+#BUS_COMPANY
+-id: uuid
+-name: string
+
+#TRAVEL
+-id: uuid
+-origin: string
+-destiny: string
+-takeOffTime: date ISO
+-arrivalTime: date ISO
+-totalSeats: int
+-availableSeats: int
+-busCompanyId

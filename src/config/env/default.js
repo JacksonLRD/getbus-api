@@ -1,12 +1,17 @@
-import { env } from "node:process"
+const { env } = require("node:process");
 
-import iracenv from "../../shared/utils/iracenv.js";
-
-await iracenv.config()
-
-export default {
+module.exports = {
   app: {
     port: env.PORT || 4400,
-    debug: env.DEBUG === "active" || false
-  }
-}
+    debug: env.DEBUG === "active" || false,
+  },
+  db: {
+    mongo: {
+      url: env.MONGO_URL,
+      options: {
+        user: env.MONGO_USER,
+        pass: env.MONGO_PASSWORD,
+      },
+    },
+  },
+};

@@ -1,12 +1,18 @@
 {
   "name": "getbus-api",
   "version": "1.1.0",
-  "description": "Projeto do exercício da rodoviária - Raro Academy",
-  "type": "module",
+  "description": "Projeto de estudo para OpenJS Node.js Services Developer (JSNSD)",
+  "type": "commonjs",
   "scripts": {
-    "start": "node src/shared/index.js",
-    "dev": "node --watch src/shared/index.js",
+    "start": "node index.js",
+    "dev": "node --watch index.js",
     "test:dev": "node --test --watch test/",
     "test": "node --test test/"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "joi": "^17.11.0",
+    "mongoose": "^8.0.3"
   }
 }
