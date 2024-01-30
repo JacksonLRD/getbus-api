@@ -1,14 +1,12 @@
-const mongoose = require("mongoose");
 const { UserController } = require("../modules/user/UserController");
-const { UserRoutes, usersRouter } = require("../modules/user/UserRoutes");
-const config = require("./env/default");
+const { usersRouter } = require("../modules/user/UserRoutes");
 const { UserService } = require("../core/services/UserService");
 
 class Server {
   #app;
-  #controllers = new Map();
-  #services = new Map();
   #repositories = new Map();
+  #services = new Map();
+  #controllers = new Map();
 
   defineApp(app) {
     this.#app = app;
@@ -18,27 +16,18 @@ class Server {
   defineRepositories(connection) {
     this.#repositories.set("users", connection.createRepository("users"));
 
-    console.log("[REPOSITORIES]: ", this.#repositories);
     return this;
   }
 
   defineServices() {
-    this.#services.set(
-      "users",
-      new UserService(this.#repositories.get("users"))
-    );
+    this.#services.set("users", new UserService(this.#repositories.get("users")));
 
-    console.log("[SERVICES]: ", this.#services);
     return this;
   }
 
   defineControllers() {
-    this.#controllers.set(
-      "users",
-      new UserController(this.#services.get("users"))
-    );
+    this.#controllers.set("users", new UserController(this.#services.get("users")));
 
-    console.log("[CONTROLLERS]: ", this.#controllers);
     return this;
   }
 
